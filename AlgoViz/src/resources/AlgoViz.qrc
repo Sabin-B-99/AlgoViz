@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>styles/main_window.css</file>
+        <file>images/trees.png</file>
+        <file>images/graph.png</file>
+        <file>images/queue.png</file>
+        <file>images/sort.png</file>
+    </qresource>
+</RCC>

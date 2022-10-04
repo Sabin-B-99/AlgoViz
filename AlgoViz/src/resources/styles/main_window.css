@@ -1,0 +1,22 @@
+#centralWidget {
+    background-color: #ffffff;
+}
+
+#treeAlgoSelectPane{
+    background-image: url(:/images/trees.png);
+    background-repeat: no-repeat;
+}
+
+#linearAlgoSelectPane {
+    background-image: url(:/images/queue.png);
+    background-repeat: no-repeat;
+}
+#sortAlgoSelectPane {
+    background-image: url(:/images/sort.png);
+    background-repeat: no-repeat;
+}
+
+#graphAlgoSelectPane {
+    background-image: url(:/images/graph.png);
+    background-repeat: no-repeat;
+}

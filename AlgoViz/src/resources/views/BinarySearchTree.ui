@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>BinarySearchTreeClass</class>
+ <widget class="QWidget" name="BinarySearchTreeClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>780</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>BinarySearchTree</string>
+  </property>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>691</width>
+     <height>97</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="bstHeaderAndControlPane">
+    <item>
+     <widget class="QLabel" name="bstHeaderLabel">
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600;&quot;&gt;Binary Search Tree&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="bstControlPane">
+      <item>
+       <widget class="QLineEdit" name="bstInsertLineEdit"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="bstInsertBtn">
+        <property name="text">
+         <string>Insert</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="bstInsertDelSepLine">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="bstDeleteLineEdit"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="bstDelBtn">
+        <property name="text">
+         <string>Delete</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="bstDelSearchSepLine">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="bstSearchLineEdit"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="bstSearchBtn">
+        <property name="text">
+         <string>Search</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="bstAnimAreaPane" native="true">
+   <property name="geometry">
+    <rect>
+     <x>9</x>
+     <y>109</y>
+     <width>691</width>
+     <height>571</height>
+    </rect>
+   </property>
+   <widget class="QGraphicsView" name="bstAnimArea">
+    <property name="geometry">
+     <rect>
+      <x>-5</x>
+      <y>1</y>
+      <width>701</width>
+      <height>571</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="bstHomeBtn">
+   <property name="geometry">
+    <rect>
+     <x>710</x>
+     <y>10</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Home</string>
+   </property>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
