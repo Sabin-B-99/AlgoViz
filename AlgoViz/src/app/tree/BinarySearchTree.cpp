@@ -19,10 +19,6 @@ void BinarySearchTree::on_bstInsertBtn_clicked()
 {
 	QString insertVal = ui.bstInsertLineEdit->text();
 	Node* nodeToInset = new Node(10, 10, insertVal, Qt::lightGray);
-
-	QPointF newNodePos = calculateNewNodePos(nodeToInset, );
-	nodeList->push_back(lastInserted);
-	scene->addItem(lastInserted);
 }
 
 void BinarySearchTree::on_bstDelBtn_clicked() {
