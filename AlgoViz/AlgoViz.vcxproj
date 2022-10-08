@@ -88,6 +88,7 @@
     <ClCompile Include="src\app\line\Line.cpp" />
     <ClCompile Include="src\app\node\Node.cpp" />
     <ClCompile Include="src\app\tree\BinarySearchTree.cpp" />
+    <ClCompile Include="src\app\tree\BSTNode.cpp" />
     <QtRcc Include="src\resources\AlgoViz.qrc" />
     <QtUic Include="src\resources\views\BinarySearchTree.ui" />
     <QtUic Include="src\resources\views\AlgoViz.ui" />
@@ -112,6 +113,7 @@
   <ItemGroup>
     <ClInclude Include="src\app\line\Line.h" />
     <ClInclude Include="src\app\node\Node.h" />
+    <ClInclude Include="src\app\tree\BSTNode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

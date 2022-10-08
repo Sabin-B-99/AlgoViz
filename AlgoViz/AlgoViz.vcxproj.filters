@@ -49,6 +49,9 @@
     <ClCompile Include="src\app\line\Line.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\app\tree\BSTNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="src\resources\images\trees.png">
@@ -88,6 +91,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\app\line\Line.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\tree\BSTNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

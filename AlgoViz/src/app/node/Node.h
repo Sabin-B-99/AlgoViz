@@ -17,16 +17,25 @@ private:
 	QGraphicsEllipseItem* nodeEllip;
 	QBrush* nodeFillBrush;
 	QPen* nodeOutilePen;
-	QGraphicsItem* parent;
+	Node* parent;
 
 public:
-	Node(QGraphicsItem *parent = nullptr);
-	Node(int32_t x, int32_t y, const QString& nodeVal, const QColor& fillColor, QGraphicsItem* parent = nullptr);
-	Node(const QPointF& pos, const QString& nodeVal, const QColor& fillColor, QGraphicsItem* parent = nullptr);
+	Node(Node*parent = nullptr);
+	Node(int32_t x, int32_t y, const QString& nodeVal, const QColor& fillColor, Node* parent = nullptr);
+	Node(const QString& nodeVal, const QColor& fillColor, Node* parent = nullptr);
+	Node(const QPointF& pos, const QString& nodeVal, const QColor& fillColor, Node* parent = nullptr);
 	~Node();
 
 	QRectF boundingRect() const;
 	void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
-	QGraphicsItem* getParent();
+	Node* getParent();
+	void setParent(Node* parent);
+
+	bool operator==(const Node& other);
+	bool operator!=(const Node& other);
+	bool operator<(const Node& other);
+	bool operator<=(const Node& other);
+	bool operator>(const Node& other);
+	bool operator>=(const Node& other);
 
 };
