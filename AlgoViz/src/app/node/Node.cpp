@@ -72,6 +72,11 @@ void Node::setParent(Node* parent)
 	this->parent = parent;
 }
 
+void Node::setPenColor(const QColor& color)
+{
+	nodeOutilePen->setColor(color);
+}
+
 
 bool Node::operator==(const Node& other)
 {

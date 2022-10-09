@@ -1,12 +1,15 @@
-#include "BinarySearchTree.h"
-#include "BSTNode.h"
-BinarySearchTree::BinarySearchTree(QWidget *parent)
+#include "BSTView.h"
+BSTView::BSTView(QWidget *parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
 	scene = new QGraphicsScene(this);
+	scene->setSceneRect(ui.bstAnimArea->rect());
 	ui.bstAnimArea->setScene(scene);
+	ui.bstAnimArea->setAlignment(Qt::AlignTop);
+	ui.bstAnimArea->setRenderHint(QPainter::Antialiasing);
 	intValidator = new QIntValidator();
+	intValidator->setRange(-9999, 9999);
 	regExp = new QRegularExpression();
 	regExp->setPattern("^$");
 	regExpValidator = new QRegularExpressionValidator(*regExp);
@@ -14,11 +17,11 @@ BinarySearchTree::BinarySearchTree(QWidget *parent)
 	bst = new BSTNode();
 }
 
-BinarySearchTree::~BinarySearchTree()
+BSTView::~BSTView()
 {
 }
 
-void BinarySearchTree::on_bstInsertBtn_clicked()
+void BSTView::on_bstInsertBtn_clicked()
 {
 	QString insertVal = ui.bstInsertLineEdit->text();
 	int pos = 0;
@@ -33,19 +36,27 @@ void BinarySearchTree::on_bstInsertBtn_clicked()
 	Line* lineUI = nullptr;
 
 	bst->getUINode(key, nodeUI);
-	bst->getNodeLine(key, lineUI);
-	if (nodeUI) {
-		scene->addItem(nodeUI);
-	}
-	if (lineUI) {
-		scene->addItem(lineUI);
-	}
+	//bst->getNodeLine(key, lineUI);
+	//if (nodeUI) {
+	//	scene->addItem(nodeUI);
+	//}
+	//if (lineUI) {
+	//	scene->addItem(lineUI);
+	//}
+
+	BSTNodeAnimator* anim = new BSTNodeAnimator(bst);
+	anim->animateNodeOutileColChange();
+	scene->addItem(nodeUI);
+
 }
 
-void BinarySearchTree::on_bstDelBtn_clicked() {
+void BSTView::on_bstDelBtn_clicked() {
 }
 
 
-void BinarySearchTree::on_bstHomeBtn_clicked() {
+void BSTView::on_bstHomeBtn_clicked() {
+	scene->clear();
+	free(bst);
+	bst = new BSTNode();
 	emit homeClicked();
 }

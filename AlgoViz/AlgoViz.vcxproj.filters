@@ -40,7 +40,7 @@
     <ClCompile Include="src\app\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\app\tree\BinarySearchTree.cpp">
+    <ClCompile Include="src\app\tree\BSTView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\app\node\Node.cpp">
@@ -50,6 +50,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\app\tree\BSTNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\animation\BSTNodeAnimator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,23 +80,26 @@
     <None Include="src\resources\styles\main_window.css" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="src\app\tree\BinarySearchTree.h">
+    <QtMoc Include="src\app\tree\BSTView.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\app\node\Node.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="src\resources\views\BinarySearchTree.ui">
+    <QtUic Include="src\resources\views\BSTView.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\app\node\Node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\app\line\Line.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\app\tree\BSTNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\animation\BSTNodeAnimator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

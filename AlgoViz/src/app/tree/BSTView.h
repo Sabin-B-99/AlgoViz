@@ -1,30 +1,31 @@
 #pragma once
 
 #include <QWidget>
-#include "ui_BinarySearchTree.h"
+#include "ui_BSTView.h"
 #include "../line/Line.h"
 #include <vector>
 #include <map>
 #include <QIntValidator>
 #include "BSTNode.h"
 #include <iostream>
+#include "../animation/BSTNodeAnimator.h"
 
-class BinarySearchTree : public QWidget
+
+class BSTView : public QWidget
 {
 	Q_OBJECT
 
 private:
-	Ui::BinarySearchTreeClass ui;
+	Ui::BSTViewClass ui;
 	QGraphicsScene* scene;
 	QIntValidator* intValidator;
 	QRegularExpression* regExp;
 	QRegularExpressionValidator* regExpValidator;
 	int32_t totalLevel;
 	BSTNode* bst;
-
 public:
-	BinarySearchTree(QWidget *parent = nullptr);
-	~BinarySearchTree();
+	BSTView(QWidget *parent = nullptr);
+	~BSTView();
 
 private:
 

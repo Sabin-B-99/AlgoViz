@@ -115,7 +115,7 @@ void BSTNode::setNodeLine(Line* nodeLine)
 void BSTNode::createUINode(BSTNode* root, QPointF* pos)
 {
 	QString nodeVal = QString::number(root->getKey());
-	UINode = new Node(*pos,nodeVal, Qt::lightGray);
+	UINode = new Node(*pos, nodeVal, Qt::lightGray);
 	root->setUINode(UINode);
 }
 
@@ -177,11 +177,9 @@ void BSTNode::getNodeLine(BSTNode* root, int32_t key, Line*& line)
 
 void BSTNode::calculatePositionInScene(BSTNode* root)
 {
-	QPointF* pos = new QPointF(0,0);
+	QPointF* pos = new QPointF(20,20);
 	int32_t newPosX = 0;
 	int32_t newPosY = 0;
-
-	
 
 	BSTNode* parent = root->getParent();
 	

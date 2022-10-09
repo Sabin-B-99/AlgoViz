@@ -11,7 +11,7 @@
 #include <cmath>
 
 
-class Line : public QGraphicsLineItem {
+class Line : public QGraphicsObject {
 private:
 	QPointF* startCoord;
 	QPointF* endCoord;

@@ -7,7 +7,7 @@
 #include <QPainter>
 #include <cmath>
 
-class Node : public QGraphicsItem{
+class Node : public QGraphicsObject{
 private:
 	int32_t x;
 	int32_t y;
@@ -30,6 +30,8 @@ public:
 	void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
 	Node* getParent();
 	void setParent(Node* parent);
+
+	void setPenColor(const QColor& color);
 
 	bool operator==(const Node& other);
 	bool operator!=(const Node& other);

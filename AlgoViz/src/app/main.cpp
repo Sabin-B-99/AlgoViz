@@ -3,11 +3,15 @@
 #include <qfile.h>
 #include <iostream>
 #include <QDebug>
+#include <QDesktopWidget>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     AlgoViz w;
+
+    QRect mainWIndowSize = QApplication::desktop()->screenGeometry();
+    w.setMinimumSize(mainWIndowSize.width(), mainWIndowSize.height());
 
     QFile file(":/styles/main_window.css");
     if (!file.open(QFile::ReadOnly)) {

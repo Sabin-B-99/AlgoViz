@@ -2,7 +2,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_AlgoViz.h"
-#include "tree/BinarySearchTree.h"
+#include "tree/BSTView.h"
 
 class AlgoViz : public QMainWindow
 {
@@ -18,5 +18,5 @@ private slots:
 
 private:
     Ui::AlgoVizClass ui;
-    BinarySearchTree bst;
+    BSTView bst;
 };

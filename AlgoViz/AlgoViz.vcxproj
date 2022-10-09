@@ -85,12 +85,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\app\animation\BSTNodeAnimator.cpp" />
     <ClCompile Include="src\app\line\Line.cpp" />
     <ClCompile Include="src\app\node\Node.cpp" />
-    <ClCompile Include="src\app\tree\BinarySearchTree.cpp" />
+    <ClCompile Include="src\app\tree\BSTView.cpp" />
     <ClCompile Include="src\app\tree\BSTNode.cpp" />
     <QtRcc Include="src\resources\AlgoViz.qrc" />
-    <QtUic Include="src\resources\views\BinarySearchTree.ui" />
+    <QtUic Include="src\resources\views\BSTView.ui" />
     <QtUic Include="src\resources\views\AlgoViz.ui" />
     <QtMoc Include="src\app\AlgoViz.h" />
     <ClCompile Include="src\app\AlgoViz.cpp" />
@@ -108,11 +109,12 @@
     <None Include="src\resources\styles\main_window.css" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="src\app\tree\BinarySearchTree.h" />
+    <QtMoc Include="src\app\tree\BSTView.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\app\animation\BSTNodeAnimator.h" />
     <ClInclude Include="src\app\line\Line.h" />
-    <ClInclude Include="src\app\node\Node.h" />
+    <QtMoc Include="src\app\node\Node.h" />
     <ClInclude Include="src\app\tree\BSTNode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
