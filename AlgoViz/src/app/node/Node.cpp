@@ -72,9 +72,25 @@ void Node::setParent(Node* parent)
 	this->parent = parent;
 }
 
-void Node::setPenColor(const QColor& color)
+
+void Node::setNodeOutlinePen(QPen* pen)
 {
-	nodeOutilePen->setColor(color);
+	this->nodeOutilePen = pen;
+}
+
+void Node::setNodeFillBrush(QBrush* brush)
+{
+	this->nodeFillBrush = brush;
+}
+
+QPen* Node::getNodeOutlinePen()
+{
+	return nodeOutilePen;
+}
+
+QBrush* Node::getNodeFillBrush()
+{
+	return nodeFillBrush;
 }
 
 

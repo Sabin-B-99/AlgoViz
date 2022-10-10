@@ -1,6 +1,11 @@
 #pragma once
 #include "../node/Node.h"
 #include "../line/Line.h"
+#include <QPropertyAnimation>
+#include <QPauseAnimation>
+#include <vector>
+#include <QTimer>
+#include <QEventLoop>
 class BSTNode : public Node{
 private:
 	int32_t key;
@@ -15,12 +20,17 @@ private:
 
 	int32_t nodeLevel;
 	
-	QPointF* nodePosInUI;
+	QPointF* initPosBeforeAnim;
+	QPointF* finalNodePosInUI;
+
 	Node* UINode;
 	Line* nodeLine;
 
+	QGraphicsScene* scene;
+	static int32_t rootXPos;
+
 public:
-	BSTNode();
+	BSTNode(QGraphicsScene* scene);
 	BSTNode(int32_t key, BSTNode* left, BSTNode* right);
 	~BSTNode();
 
@@ -31,11 +41,12 @@ public:
 	BSTNode* getRight();
 	BSTNode* getParent();
 	BSTNode* getRoot();
-	Line* getNodeLine();
-	QPointF* getUINodePos();
 	int32_t getLevel();
 	bool isLeftChild();
 	bool isRightChild();
+
+	QPointF* getInitPosBeforeAnim();
+	QPointF* getFinalNodePosInUI();
 
 	void setLeft(BSTNode* left);
 	void setRight(BSTNode* right);
@@ -43,17 +54,24 @@ public:
 	void setLevel(int32_t nodeLevel);
 	void setLeftChild(bool leftChild);
 	void setRightChild(bool rightChild);
-	void setUINodePos(QPointF* uiNodePos);
-	void setUINode(Node* node);
-	void setNodeLine(Line* nodeLine);
-	void createUINode(BSTNode* root, QPointF* pos);
-	void createNodeLine(BSTNode* root);
-
+	
+	
+	void createUINode();
+	void createNodeLine();
 	Node* getUINode();
 	void getUINode(int32_t key, Node*& node);
 	void getUINode(BSTNode* root, int32_t key, Node*& node);
+	Line* getNodeLine();
 	void getNodeLine(int32_t key, Line*& line);
 	void getNodeLine(BSTNode* root, int32_t key, Line*& line);
-	void calculatePositionInScene(BSTNode* root);
+
+	
+	QPointF calculteNodePos();
+
+private:
+	void drawTreeUIElements();
+	void showInsertionAnimation();
+	void showPauseAnimation(int msecs);
+
 
 };

@@ -31,7 +31,11 @@ public:
 	Node* getParent();
 	void setParent(Node* parent);
 
-	void setPenColor(const QColor& color);
+	void setNodeOutlinePen(QPen* pen);
+	void setNodeFillBrush(QBrush* brush);
+
+	QPen* getNodeOutlinePen();
+	QBrush* getNodeFillBrush();
 
 	bool operator==(const Node& other);
 	bool operator!=(const Node& other);

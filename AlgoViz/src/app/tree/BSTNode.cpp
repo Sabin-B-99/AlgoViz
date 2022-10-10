@@ -1,16 +1,17 @@
 #include "BSTNode.h"
-#include <iostream>
 
-BSTNode::BSTNode()
-	:root(nullptr), key(0), left(nullptr), right(nullptr), parent(nullptr), nodeLevel(-1), 
-	leftChild(false), rightChild(false), nodePosInUI(nullptr), UINode(nullptr), nodeLine(nullptr)
+BSTNode::BSTNode(QGraphicsScene* scene)
+	:scene(scene), root(nullptr), key(0), left(nullptr), right(nullptr), parent(nullptr), nodeLevel(-1),
+	leftChild(false), rightChild(false), finalNodePosInUI(nullptr), UINode(nullptr), nodeLine(nullptr)
 {
+	initPosBeforeAnim = new QPointF(20, 20);
 }
 
 BSTNode::BSTNode(int32_t key, BSTNode* left, BSTNode* right)
 	:root(nullptr), key(key), left(left), right(right), parent(nullptr), nodeLevel(-1),
-	leftChild(false), rightChild(false), nodePosInUI(nullptr), UINode(nullptr), nodeLine(nullptr)
+	leftChild(false), rightChild(false), finalNodePosInUI(nullptr), UINode(nullptr), nodeLine(nullptr)
 {
+	initPosBeforeAnim = new QPointF(20, 20);
 }
 
 BSTNode::~BSTNode()
@@ -47,10 +48,7 @@ Line* BSTNode::getNodeLine()
 	return this->nodeLine;
 }
 
-QPointF* BSTNode::getUINodePos()
-{
-	return this->nodePosInUI;
-}
+
 
 int32_t BSTNode::getLevel()
 {
@@ -97,38 +95,34 @@ void BSTNode::setRightChild(bool rightChild)
 	this->rightChild = rightChild;
 }
 
-void BSTNode::setUINodePos(QPointF* uiNodePos)
+
+
+void BSTNode::createUINode()
 {
-	this->nodePosInUI = uiNodePos;
+	QString nodeVal = QString::number(this->getKey());
+	this->UINode = new Node(*(this->getInitPosBeforeAnim()), nodeVal, Qt::lightGray);
 }
 
-void BSTNode::setUINode(Node* node)
+void BSTNode::createNodeLine()
 {
-	this->UINode = node;
-}
-
-void BSTNode::setNodeLine(Line* nodeLine)
-{
-	this->nodeLine = nodeLine;
-}
-
-void BSTNode::createUINode(BSTNode* root, QPointF* pos)
-{
-	QString nodeVal = QString::number(root->getKey());
-	UINode = new Node(*pos, nodeVal, Qt::lightGray);
-	root->setUINode(UINode);
-}
-
-void BSTNode::createNodeLine(BSTNode* root)
-{
-	BSTNode* parent = root->getParent();
+	BSTNode* parent = this->getParent();
 	Node* parentNodeUI = nullptr;
 	if (parent) {
 		parentNodeUI = parent->getUINode();
-		root->setNodeLine(new Line(parentNodeUI, root->getUINode(), true, false));
+		this->nodeLine = new Line(parentNodeUI, this->getUINode(), true, false);
 	}
 }
 
+
+QPointF* BSTNode::getInitPosBeforeAnim()
+{
+	return this->initPosBeforeAnim;
+}
+
+QPointF* BSTNode::getFinalNodePosInUI()
+{
+	return this->finalNodePosInUI;
+}
 
 Node* BSTNode::getUINode()
 {
@@ -174,41 +168,67 @@ void BSTNode::getNodeLine(BSTNode* root, int32_t key, Line*& line)
 	}
 }
 
-
-void BSTNode::calculatePositionInScene(BSTNode* root)
+QPointF BSTNode::calculteNodePos()
 {
-	QPointF* pos = new QPointF(20,20);
-	int32_t newPosX = 0;
+	QPointF finalPos(0, 0);
+	int32_t newPosX = rootXPos;
 	int32_t newPosY = 0;
 
-	BSTNode* parent = root->getParent();
-	
+	BSTNode* parent = this->getParent();
+
+
 	if (parent) {
-		Node* parentNode = parent->getUINode();
-		int32_t midX = 0;
-		int32_t midY = 0;
-
-		if (parentNode) {
-			midX = parentNode->boundingRect().x() + (parentNode->boundingRect().width() / 2);
-			midY = parentNode->boundingRect().y() + parentNode->boundingRect().height();
-
-			if (root->isLeftChild()) {
-				newPosX = midX - parentNode->boundingRect().width();
-				newPosY = midY + parentNode->boundingRect().height();
-				pos->setX(newPosX);
-				pos->setY(newPosY);
-			}
-
-			if (root->isRightChild()) {
-				newPosX = midX + parentNode->boundingRect().width();
-				newPosY = midY + parentNode->boundingRect().height();
-				pos->setX(newPosX);
-				pos->setY(newPosY);
-			}
+		Node* parentNodeUI = parent->getUINode();
+		int32_t midX = parentNodeUI->pos().x() + parentNodeUI->boundingRect().width() / 2;
+		int32_t midY = parentNodeUI->pos().y() + parentNodeUI->boundingRect().height();
+		if (this->isLeftChild()) {
+			newPosX = midX - 50;
+			newPosY = midY + 25;
+		}
+		if (this->isRightChild()) {
+			newPosX = midX + 50;
+			newPosY = midY + 25;
 		}
 	}
-	root->setUINodePos(pos);
+
+	finalPos.setX(newPosX);
+	finalPos.setY(newPosY);
+	this->finalNodePosInUI = new QPointF(finalPos);
+	return finalPos;
 }
+
+void BSTNode::drawTreeUIElements()
+{
+
+	this->createUINode();
+	this->getUINode()->setPos(this->calculteNodePos());
+}
+
+
+
+void BSTNode::showInsertionAnimation()
+{	
+	if (this->getParent()) {
+		QPropertyAnimation* insertionAnim = new QPropertyAnimation(this->UINode, "pos");
+		insertionAnim->setStartValue(*(this->getInitPosBeforeAnim()));
+		insertionAnim->setEndValue(*(this->getFinalNodePosInUI()));
+		insertionAnim->setDuration(2000);
+		insertionAnim->start();
+	}
+
+}
+
+void BSTNode::showPauseAnimation(int msecs)
+{
+	QTimer* t = new QTimer();
+	t->setSingleShot(true);
+	t->start(msecs);//this is the time to sleep in this case 60 seconds 
+	QEventLoop pause;
+	connect(t, SIGNAL(timeout()), &pause, SLOT(quit()));
+	pause.exec();//keeps the program responsive 
+}
+
+
 
 
 
@@ -218,9 +238,9 @@ void BSTNode::insert(int32_t key)
 		root = new BSTNode(key, nullptr, nullptr);
 		root->setParent(nullptr);
 		root->setLevel(0);
-		calculatePositionInScene(root);
-		createUINode(root, root->getUINodePos());
-		createNodeLine(root);
+		root->drawTreeUIElements();
+		scene->addItem(root->getUINode());
+		scene->addItem(root->getNodeLine());
 	}
 	else {
 		insert(root, key);
@@ -229,15 +249,23 @@ void BSTNode::insert(int32_t key)
 
 void BSTNode::insert(BSTNode* root, int32_t key)
 {    
+	root->getUINode()->setNodeOutlinePen(new QPen(Qt::red));
+	scene->update();
+	root->showPauseAnimation(800);
+	root->getUINode()->setNodeOutlinePen(new QPen(Qt::black));
+	scene->update();
+
 	if (key < root->getKey()){
 		if (root->getleft() == nullptr) {
 			root->setLeft(new BSTNode(key, nullptr, nullptr));
 			root->getleft()->setParent(root); 
 			root->getleft()->setLevel(root->getLevel() + 1);
 			root->getleft()->setLeftChild(true);
-			calculatePositionInScene(root->getleft());
-			createUINode(root->getleft(), root->getleft()->getUINodePos());
-			createNodeLine(root->getleft());
+
+			root->getleft()->drawTreeUIElements();
+			root->getleft()->showInsertionAnimation();
+			scene->addItem(root->getleft()->getUINode());
+			scene->addItem(root->getleft()->getNodeLine());	
 		}
 		else {
 			insert(root->getleft(), key);
@@ -250,9 +278,12 @@ void BSTNode::insert(BSTNode* root, int32_t key)
 			root->getRight()->setParent(root);
 			root->getRight()->setLevel(root->getLevel() + 1);
 			root->getRight()->setRightChild(true);
-			calculatePositionInScene(root->getRight());
-			createUINode(root->getRight(), root->getRight()->getUINodePos());
-			createNodeLine(root->getRight());
+
+			root->getRight()->drawTreeUIElements();
+			root->getRight()->showInsertionAnimation();
+	
+			scene->addItem(root->getRight()->getUINode());
+			scene->addItem(root->getRight()->getNodeLine());
 		}
 		else {
 			insert(root->getRight(), key);
@@ -260,4 +291,4 @@ void BSTNode::insert(BSTNode* root, int32_t key)
 	}
 }
 
-
+int32_t BSTNode::rootXPos = 250;

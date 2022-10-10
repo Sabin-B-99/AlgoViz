@@ -114,7 +114,7 @@
   <ItemGroup>
     <ClInclude Include="src\app\animation\BSTNodeAnimator.h" />
     <ClInclude Include="src\app\line\Line.h" />
-    <QtMoc Include="src\app\node\Node.h" />
+    <ClInclude Include="src\app\node\Node.h" />
     <ClInclude Include="src\app\tree\BSTNode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

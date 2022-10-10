@@ -11,7 +11,7 @@
 #include <cmath>
 
 
-class Line : public QGraphicsObject {
+class Line : public QGraphicsItem {
 private:
 	QPointF* startCoord;
 	QPointF* endCoord;
@@ -24,7 +24,7 @@ private:
 	double arrowSize;
 public:
 	Line(QGraphicsItem* parent = nullptr);
-	Line(QGraphicsItem* startNode,QGraphicsItem* endNode, bool hasArrow, bool hasArrowAtTopOrLeft, QGraphicsItem* parent = nullptr);
+	Line(QGraphicsItem* startNode, QGraphicsItem* endNode, bool hasArrow, bool hasArrowAtTopOrLeft, QGraphicsItem* parent = nullptr);
 
 	QRectF boundingRect() const;
 	void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);

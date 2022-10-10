@@ -8,7 +8,6 @@
 #include <QIntValidator>
 #include "BSTNode.h"
 #include <iostream>
-#include "../animation/BSTNodeAnimator.h"
 
 
 class BSTView : public QWidget
