@@ -1,12 +1,14 @@
 #include "BSTView.h"
+#include "../graph/Graph.h"
 BSTView::BSTView(QWidget *parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
 	scene = new QGraphicsScene(this);
-	scene->setSceneRect(ui.bstAnimArea->rect());
+	/*scene->setSceneRect(ui.bstAnimArea->rect());*/
 	ui.bstAnimArea->setScene(scene);
 	ui.bstAnimArea->setRenderHint(QPainter::Antialiasing);
+	ui.bstAnimArea->setAlignment(Qt::AlignTop);
 	intValidator = new QIntValidator();
 	intValidator->setRange(-9999, 9999);
 	regExp = new QRegularExpression();
@@ -22,12 +24,8 @@ BSTView::~BSTView()
 
 void BSTView::on_bstInsertBtn_clicked()
 {
-	QString insertVal = ui.bstInsertLineEdit->text();
-	int pos = 0;
-	if (regExpValidator->validate(insertVal, pos) == QValidator::State::Acceptable) {
-		insertVal = "0";
-	}
-	bst->insert(insertVal.toInt());
+	Graph* g = new Graph(scene);
+	g->displayGraphNodes();
 }
 
 void BSTView::on_bstDelBtn_clicked() {

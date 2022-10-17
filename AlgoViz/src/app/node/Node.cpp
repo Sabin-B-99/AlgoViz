@@ -7,8 +7,9 @@ Node::Node(Node* parent)
 Node::Node(int32_t x, int32_t y, const QString& nodeVal, const QColor& fillColor, Node* parent)
 	:x(x), y(y), nodeVal(nodeVal), parent(parent)
 {
-	boundRectWidth = 50 + std::pow(nodeVal.length(), 1.5);
-	boundRectHeight = 50 + std::pow(nodeVal.length(), 1.5);
+	this->nodeValInt = nodeVal.toInt();
+	boundRectWidth = 50;
+	boundRectHeight = 50;
 	nodeOutilePen = new QPen(Qt::black);
 	nodeFillBrush = new QBrush(fillColor);
 	nodeEllip = new QGraphicsEllipseItem();
@@ -17,10 +18,11 @@ Node::Node(int32_t x, int32_t y, const QString& nodeVal, const QColor& fillColor
 Node::Node(const QString& nodeVal, const QColor& fillColor, Node* parent)
 	:nodeVal(nodeVal), parent(parent)
 {
+	this->nodeValInt = nodeVal.toInt();
 	x = 0;
 	y = 0;
-	boundRectWidth = 50 + std::pow(nodeVal.length(), 1.5);
-	boundRectHeight = 50 + std::pow(nodeVal.length(), 1.5);
+	boundRectWidth = 50;
+	boundRectHeight = 50;
 	nodeOutilePen = new QPen(Qt::black);
 	nodeFillBrush = new QBrush(fillColor);
 	nodeEllip = new QGraphicsEllipseItem();
@@ -29,8 +31,9 @@ Node::Node(const QString& nodeVal, const QColor& fillColor, Node* parent)
 Node::Node(const QPointF& pos, const QString& nodeVal, const QColor& fillColor, Node* parent)
 	:x(pos.x()), y(pos.y()), nodeVal(nodeVal), parent(parent)
 {
-	boundRectWidth = 50 + std::pow(nodeVal.length(), 1.5);
-	boundRectHeight = 50 + std::pow(nodeVal.length(), 1.5);
+	this->nodeValInt = nodeVal.toInt();
+	boundRectWidth = 50;
+	boundRectHeight = 50;
 	nodeOutilePen = new QPen(Qt::black);
 	nodeFillBrush = new QBrush(fillColor);
 	nodeEllip = new QGraphicsEllipseItem();

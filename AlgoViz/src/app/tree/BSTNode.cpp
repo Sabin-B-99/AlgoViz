@@ -95,6 +95,21 @@ void BSTNode::setRightChild(bool rightChild)
 	this->rightChild = rightChild;
 }
 
+void BSTNode::setInitX(int initX)
+{
+	this->initX = initX;
+}
+
+void BSTNode::setInitY(int initY)
+{
+	this->initY = initY;
+}
+
+void BSTNode::setMod(int mod)
+{
+	this->mod = mod;
+}
+
 
 
 void BSTNode::createUINode()
@@ -199,7 +214,6 @@ QPointF BSTNode::calculteNodePos()
 
 void BSTNode::drawTreeUIElements()
 {
-
 	this->createUINode();
 	this->getUINode()->setPos(this->calculteNodePos());
 }
@@ -218,6 +232,7 @@ void BSTNode::showInsertionAnimation()
 
 }
 
+//stack overflow
 void BSTNode::showPauseAnimation(int msecs)
 {
 	QTimer* t = new QTimer();
@@ -228,12 +243,129 @@ void BSTNode::showPauseAnimation(int msecs)
 	pause.exec();//keeps the program responsive 
 }
 
+void BSTNode::calculateInitialX()
+{
+	calculateInitialX(root);
+}
+
+void BSTNode::calculateInitialX(BSTNode* node)
+{
+	
+	if (node) {
+		calculateInitialX(node->getleft());
+		calculateInitialX(node->getRight());
+		if (node->isRightChild()) {
+			BSTNode* leftSibling = node->getParent()->getleft();
+			if (leftSibling) {
+				node->setInitX(leftSibling->getFinalNodePosInUI()->x() + 1);
+				node->setMod(node->getParent()->getFinalNodePosInUI()->x() + 50);
+			}
+			else {
+				node->setInitX(0);
+				node->setMod(node->getParent()->getFinalNodePosInUI()->x() - 50);
+			}
+		}
+		else {
+			node->setInitX(rootXPos);
+			node->setMod(0);
+		}
+	}
+	else {
+		return;
+	}
+	
+}
+
+void BSTNode::checkAllChildrenOnScreen()
+{
+	checkAllChildrenOnScreen(root);
+}
 
 
 
+void BSTNode::checkAllChildrenOnScreen(BSTNode* node)
+{
+	if (node) {
+		std::map<int, float>* nodeContour = new std::map<int, float>;
+		getLeftContour(node, 0, nodeContour);
+		float shiftAmount = 0;
+		for (std::map<int, float>::iterator it = nodeContour->begin(); it != nodeContour->end(); it++)
+		{
+			if (it->second + shiftAmount < 0) {
+				shiftAmount = (it->second * -1);
+			}
+		}
+		if (shiftAmount > 0) {
+			node->initX += shiftAmount;
+			node->mod += shiftAmount;
+		}
+	}
+	else {
+		return;
+	}
+}
+
+void BSTNode::getLeftContour(BSTNode* node, float modSum, std::map<int, float>* nodeContur)
+{
+	if (node) {
+		if (!nodeContur->count(node->getFinalNodePosInUI()->y())) {
+			nodeContur->emplace(node->getFinalNodePosInUI()->y(), node->initX + modSum);
+		}
+		else {
+			std::map<int, float>::iterator it = nodeContur->find(node->getFinalNodePosInUI()->y());
+			if (it != nodeContur->end()) {
+				it->second = std::min(it->second, node->initX + modSum);
+			}
+		}
+
+		modSum += node->mod;
+		getLeftContour(node->getleft(), modSum, nodeContur);
+		getLeftContour(node->getRight(), modSum, nodeContur);
+	}
+	else {
+		return;
+	}
+}
+
+void BSTNode::calculateFinalX()
+{
+	calculateFinalX(root, 0);
+}
+
+
+void BSTNode::calculateFinalX(BSTNode* node, float modSum)
+{
+	if (node) {
+		node->initX = modSum;
+		modSum += node->mod;
+		calculateFinalX(node->getleft(), modSum);
+		calculateFinalX(node->getRight(), modSum);
+	}
+	else {
+		return;
+	}
+}
+
+void BSTNode::reDrawTree()
+{
+	reDrawTree(root);
+}
+
+void BSTNode::reDrawTree(BSTNode* node)
+{
+	if (node) {
+		node->getUINode()->setPos(node->initX, node->getFinalNodePosInUI()->y());
+		reDrawTree(node->getleft());
+		reDrawTree(node->getRight());
+	}
+	else {
+		return;
+	}
+}
 
 void BSTNode::insert(int32_t key)
 {
+
 	if (root == nullptr) {
 		root = new BSTNode(key, nullptr, nullptr);
 		root->setParent(nullptr);

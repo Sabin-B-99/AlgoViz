@@ -6,6 +6,8 @@
 #include <vector>
 #include <QTimer>
 #include <QEventLoop>
+#include <map>
+#include <algorithm>
 class BSTNode : public Node{
 private:
 	int32_t key;
@@ -28,6 +30,12 @@ private:
 
 	QGraphicsScene* scene;
 	static int32_t rootXPos;
+
+	//for tider tree
+	int initX;
+	int initY;
+	int mod;
+
 
 public:
 	BSTNode(QGraphicsScene* scene);
@@ -54,6 +62,10 @@ public:
 	void setLevel(int32_t nodeLevel);
 	void setLeftChild(bool leftChild);
 	void setRightChild(bool rightChild);
+
+	void setInitX(int initX);
+	void setInitY(int initY);
+	void setMod(int mod);
 	
 	
 	void createUINode();
@@ -68,10 +80,23 @@ public:
 	
 	QPointF calculteNodePos();
 
+
+	void calculateInitialX();
+	void calculateInitialX(BSTNode* node);
+	void checkAllChildrenOnScreen();
+	void checkAllChildrenOnScreen(BSTNode* node);
+	void getLeftContour(BSTNode* node, float modSum, std::map<int, float>* nodeContur);
+	void calculateFinalX();
+	void calculateFinalX(BSTNode* node, float modSum);
+
+	void reDrawTree();
+	void reDrawTree(BSTNode* node);
 private:
 	void drawTreeUIElements();
 	void showInsertionAnimation();
 	void showPauseAnimation(int msecs);
+
+
 
 
 };

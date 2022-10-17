@@ -85,7 +85,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\app\animation\BSTNodeAnimator.cpp" />
+    <ClCompile Include="src\app\graph\Graph.cpp" />
     <ClCompile Include="src\app\line\Line.cpp" />
     <ClCompile Include="src\app\node\Node.cpp" />
     <ClCompile Include="src\app\tree\BSTView.cpp" />
@@ -112,7 +112,7 @@
     <QtMoc Include="src\app\tree\BSTView.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\app\animation\BSTNodeAnimator.h" />
+    <ClInclude Include="src\app\graph\Graph.h" />
     <ClInclude Include="src\app\line\Line.h" />
     <ClInclude Include="src\app\node\Node.h" />
     <ClInclude Include="src\app\tree\BSTNode.h" />

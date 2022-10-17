@@ -9,6 +9,7 @@
 
 class Node : public QGraphicsObject{
 private:
+	int32_t nodeValInt;
 	int32_t x;
 	int32_t y;
 	int32_t boundRectWidth;
