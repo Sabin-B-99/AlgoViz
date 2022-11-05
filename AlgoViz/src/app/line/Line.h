@@ -30,6 +30,9 @@ public:
 	void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
 	void setArrowSize(double arrowSize);
 
+	QGraphicsItem* getStartNode();
+	QGraphicsItem* getEndNode();
+
 private:
 	QPolygonF* buildArrowHead(const QLineF& line);
 

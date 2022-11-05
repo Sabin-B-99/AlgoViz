@@ -32,11 +32,11 @@ void Line::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWid
 {
 	painter->setPen(*lineStrokePen);
 
-	int32_t lineStartX = startNode->boundingRect().x() + startNode->boundingRect().width() / 2;
-	int32_t lineStartY = startNode->boundingRect().y() + startNode->boundingRect().height();
+	int32_t lineStartX = startNode->pos().x() + startNode->boundingRect().width() / 2;
+	int32_t lineStartY = startNode->pos().y() + startNode->boundingRect().height();
 
-	int32_t lineEndX = endNode->boundingRect().x() + endNode->boundingRect().width() / 2;
-	int32_t lineEndY = endNode->boundingRect().y();
+	int32_t lineEndX = endNode->pos().x() + endNode->boundingRect().width() / 2;
+	int32_t lineEndY = endNode->pos().y();
 
 	startCoord = new QPointF(lineStartX, lineStartY);
 	endCoord = new QPointF(lineEndX, lineEndY);
@@ -60,6 +60,16 @@ void Line::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWid
 void Line::setArrowSize(double arrowSize)
 {
 	this->arrowSize = arrowSize;
+}
+
+QGraphicsItem* Line::getStartNode()
+{
+	return this->startNode;
+}
+
+QGraphicsItem* Line::getEndNode()
+{
+	return this->endNode;
 }
 
 QPolygonF* Line::buildArrowHead(const QLineF& line)

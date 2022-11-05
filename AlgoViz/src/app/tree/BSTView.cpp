@@ -1,5 +1,5 @@
 #include "BSTView.h"
-#include "../graph/Graph.h"
+
 BSTView::BSTView(QWidget *parent)
 	: QWidget(parent)
 {
@@ -15,7 +15,10 @@ BSTView::BSTView(QWidget *parent)
 	regExp->setPattern("^$");
 	regExpValidator = new QRegularExpressionValidator(*regExp);
 	ui.bstInsertLineEdit->setValidator(intValidator);
+
 	bst = new BSTNode(scene);
+	dfs = new DFS(scene, ui.bstPlainTextEdit);
+	dfs->displayGraph();
 }
 
 BSTView::~BSTView()
@@ -24,8 +27,12 @@ BSTView::~BSTView()
 
 void BSTView::on_bstInsertBtn_clicked()
 {
-	Graph* g = new Graph(scene);
-	g->displayGraphNodes();
+	QString insertVal = ui.bstInsertLineEdit->text();
+	int pos = 0;
+	if (regExpValidator->validate(insertVal, pos) == QValidator::State::Acceptable) {
+		insertVal = "0";
+	}
+	dfs->run(insertVal.toInt());
 }
 
 void BSTView::on_bstDelBtn_clicked() {

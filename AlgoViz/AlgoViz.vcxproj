@@ -85,6 +85,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\app\animation\PauseAnim.cpp" />
+    <ClCompile Include="src\app\graph\DFS.cpp" />
+    <ClCompile Include="src\app\graph\BFS.cpp" />
     <ClCompile Include="src\app\graph\Graph.cpp" />
     <ClCompile Include="src\app\line\Line.cpp" />
     <ClCompile Include="src\app\node\Node.cpp" />
@@ -112,6 +115,9 @@
     <QtMoc Include="src\app\tree\BSTView.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\app\animation\PauseAnim.h" />
+    <ClInclude Include="src\app\graph\DFS.h" />
+    <ClInclude Include="src\app\graph\BFS.h" />
     <ClInclude Include="src\app\graph\Graph.h" />
     <ClInclude Include="src\app\line\Line.h" />
     <ClInclude Include="src\app\node\Node.h" />

@@ -9,8 +9,10 @@ Graph::Graph(QGraphicsScene* graphicsScene)
 	:graphicsScene(graphicsScene)
 {
 	this->nodesInGraph = new std::vector<Node*>;
-	this->nodeNeighbours = new std::map<int, std::vector<Node*>*>;
+	this->linesInGraph = new std::vector<Line*>;
+	this->nodeNeighbours = new std::map<int, std::vector<int>*>;
 	this->nodePairByLevel = new std::map<int, std::pair<Node*, Node*>*>;
+	createStaticGraph();
 }
 
 Graph::~Graph()
@@ -19,13 +21,35 @@ Graph::~Graph()
 
 void Graph::displayGraphNodes()
 {
-	createGraphNode();
-	pairNodesByLevel();
-	positionGraphNodes();
 	for (std::vector<Node*>::iterator it = this->nodesInGraph->begin(); it != this->nodesInGraph->end(); it++)
 	{
 		this->graphicsScene->addItem(*it);
 	}
+	
+	for (std::vector<Line*>::iterator it = this->linesInGraph->begin(); it != this->linesInGraph->end(); it++)
+	{
+		this->graphicsScene->addItem(*it);
+	}
+}
+
+std::vector<Node*>* Graph::getNodesInGraph()
+{
+	return this->nodesInGraph;
+}
+
+std::vector<Line*>* Graph::getLinesInGraph()
+{
+	return this->linesInGraph;
+}
+
+std::map<int, std::pair<Node*, Node*>*>* Graph::getNodePairByLevel()
+{
+	return this->nodePairByLevel;
+}
+
+std::map<int, std::vector<int>*>* Graph::getNodeNeighbours()
+{
+	return this->nodeNeighbours;
 }
 
 void Graph::createGraphNode()
@@ -37,6 +61,49 @@ void Graph::createGraphNode()
 		graphNode = new Node(nodeVal, Qt::lightGray);
 		this->nodesInGraph->emplace_back(graphNode);
 	}
+}
+
+void Graph::createConnections()
+{
+	Node* currentNode = nullptr;
+	Node* currentNeighbour = nullptr;
+	std::vector<int>* neighbourList = nullptr;
+	Line* line = nullptr;
+
+	for (std::map<int, std::vector<int>*>::iterator it = nodeNeighbours->begin(); it != nodeNeighbours->end(); it++) {
+		currentNode = nodesInGraph->at(it->first);
+		neighbourList = it->second;
+		for (std::vector<int>::iterator nIt = neighbourList->begin(); nIt != neighbourList->end(); nIt++)
+		{
+			currentNeighbour = nodesInGraph->at(*nIt);
+			if (!hasConnection(currentNode, currentNeighbour)) {
+				line = new Line(currentNode, currentNeighbour, false, false);
+				linesInGraph->push_back(line);
+			}
+		}
+	}
+}
+
+bool Graph::hasConnection(Node* start, Node* end)
+{
+	Line* currentLine = nullptr;
+	for (std::vector<Line*>::iterator it = linesInGraph->begin(); it != linesInGraph->end(); it++)
+	{
+		currentLine = *it;
+		if ((start == currentLine->getStartNode() && end == currentLine->getEndNode()) || (start == currentLine->getEndNode() && end == currentLine->getStartNode())) {
+			return true;
+		}
+	}
+	return false;
+}
+
+void Graph::createStaticGraph()
+{
+	createGraphNode();
+	pairNodesByLevel();
+	positionGraphNodes();
+	createNeighbours();
+	createConnections();
 }
 
 /// <summary>
@@ -124,6 +191,48 @@ void Graph::positionGraphNodes(){
 	}
 }
 
+void Graph::createNeighbours()
+{
+	//hardCoding neighbours for testing purposes: refractor later
+
+	std::vector<int>* neighbourListNode0 = new std::vector<int>;
+	std::vector<int>* neighbourListNode1 = new std::vector<int>;
+	std::vector<int>* neighbourListNode2 = new std::vector<int>;
+	std::vector<int>* neighbourListNode3 = new std::vector<int>;
+	std::vector<int>* neighbourListNode4 = new std::vector<int>;
+	std::vector<int>* neighbourListNode5 = new std::vector<int>;
+	std::vector<int>* neighbourListNode6 = new std::vector<int>;
+	std::vector<int>* neighbourListNode7 = new std::vector<int>;
+
+	neighbourListNode0->push_back(1);
+	nodeNeighbours->emplace(0, neighbourListNode0);
+
+	neighbourListNode1->push_back(0);
+	neighbourListNode1->push_back(5);
+	neighbourListNode1->push_back(6);
+	nodeNeighbours->emplace(1, neighbourListNode1);
+
+	neighbourListNode2->push_back(5);
+	nodeNeighbours->emplace(2, neighbourListNode2);
+
+	nodeNeighbours->emplace(3, neighbourListNode3);
+
+	neighbourListNode4->push_back(6);
+	nodeNeighbours->emplace(4, neighbourListNode4);
+
+	neighbourListNode5->push_back(1);
+	neighbourListNode5->push_back(2);
+	neighbourListNode5->push_back(7);
+	nodeNeighbours->emplace(5, neighbourListNode5);
+
+	neighbourListNode6->push_back(1);
+	neighbourListNode6->push_back(4);
+	nodeNeighbours->emplace(6, neighbourListNode6);
+
+	neighbourListNode7->push_back(5);
+	nodeNeighbours->emplace(7, neighbourListNode7);
+}
+
 void Graph::pairNodesByLevel()
 {
 	int maxWidthPoint = totalNodesInGraph / 4;
@@ -154,5 +263,7 @@ void Graph::pairNodesByLevel()
 		nodeNo += 2;
 	}
 }
+
+
 
 const int Graph::totalNodesInGraph = 8;
