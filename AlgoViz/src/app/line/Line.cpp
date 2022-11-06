@@ -13,8 +13,8 @@ Line::Line(QGraphicsItem* parent)
 	arrowSize = 9;
 }
 
-Line::Line(QGraphicsItem* startNode, QGraphicsItem* endNode, bool hasArrow, bool hasArrowAtTopOrLeft, QGraphicsItem* parent)
-	:startNode(startNode), endNode(endNode), hasArrowHead(hasArrow), hasArrowAtTopOrLeft(hasArrowAtTopOrLeft), parent(parent)
+Line::Line(QGraphicsItem* startNode, QGraphicsItem* endNode, bool hasArrow, bool hasArrowAtTopOrLeft, const QString& lineText, QGraphicsItem* parent)
+	:startNode(startNode), endNode(endNode), hasArrowHead(hasArrow), hasArrowAtTopOrLeft(hasArrowAtTopOrLeft), lineText(lineText), parent(parent)
 {
 	lineStrokePen = new QPen(Qt::black);
 	lineStrokePen->setWidth(2);
@@ -42,6 +42,10 @@ void Line::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWid
 	endCoord = new QPointF(lineEndX, lineEndY);
 	painter->drawLine(*startCoord, *endCoord);
 
+	int32_t textStartX = ((lineEndX + lineStartX) / 2) - 2;
+	int32_t textStartY = ((lineEndY + lineStartY) / 2) - 8;
+
+	painter->drawText(QPointF(textStartX, textStartY), lineText);
 	
 	if (hasArrowHead) {
 		QPolygonF* arrowHeadBottomOrRight = buildArrowHead(QLineF(*endCoord, *startCoord));
@@ -54,7 +58,6 @@ void Line::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWid
 		painter->setBrush(Qt::black);
 		painter->drawPolygon(*arrowHeadTopOrLeft);
 	}
-
 }
 
 void Line::setArrowSize(double arrowSize)

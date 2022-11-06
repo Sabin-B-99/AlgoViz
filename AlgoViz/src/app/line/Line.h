@@ -22,9 +22,10 @@ private:
 	bool hasArrowHead;
 	bool hasArrowAtTopOrLeft;
 	double arrowSize;
+	QString lineText;
 public:
 	Line(QGraphicsItem* parent = nullptr);
-	Line(QGraphicsItem* startNode, QGraphicsItem* endNode, bool hasArrow, bool hasArrowAtTopOrLeft, QGraphicsItem* parent = nullptr);
+	Line(QGraphicsItem* startNode, QGraphicsItem* endNode, bool hasArrow, bool hasArrowAtTopOrLeft, const QString& lineText = " ", QGraphicsItem* parent = nullptr);
 
 	QRectF boundingRect() const;
 	void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
