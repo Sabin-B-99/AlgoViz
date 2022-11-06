@@ -1,17 +1,16 @@
 #include "DFS.h"
 
 DFS::DFS()
+	:recursionStackCount(0)
 {
 }
 
 DFS::DFS(QGraphicsScene* graphicsScene, QPlainTextEdit* dfsConsole)
-	:graphicsScene(graphicsScene), dfsConsole(dfsConsole)
+	:graphicsScene(graphicsScene), dfsConsole(dfsConsole), recursionStackCount(0)
 {
 	dfsGraph = new Graph(graphicsScene);
 	dfsConsoleText = "DFS Traversal:\n\n";
 	dfsConsole->setPlainText(dfsConsoleText);
-
-	recursionStackCount = 0;
 }
 
 DFS::~DFS()
@@ -20,6 +19,7 @@ DFS::~DFS()
 
 void DFS::run(int startNodeId)
 {
+	recursionStackCount++;
 	std::vector<Node*>* nodesInGraph = dfsGraph->getNodesInGraph();
 	std::map<int, std::vector<int>*>* nodeNeighbours = dfsGraph->getNodeNeighbours();
 
@@ -37,12 +37,11 @@ void DFS::run(int startNodeId)
 	for(std::vector<int>::iterator it = nodeNeighbours->at(startNodeId)->begin(); it != nodeNeighbours->at(startNodeId)->end(); it++)
 	{
 		if (!dfsVisited[*it]) {
-			recursionStackCount++;
 			run(*it);
 		}
 	}
 	recursionStackCount--;
-	if (recursionStackCount == 0 || recursionStackCount == -1) {
+	if (recursionStackCount <= 0) {
 		dfsConsoleText.append(" X\n DFS Traversal Complete!!\n");
 		dfsConsole->setPlainText(dfsConsoleText);
 	}
