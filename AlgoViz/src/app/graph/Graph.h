@@ -6,6 +6,9 @@
 #include <cmath>
 #include <utility>
 #include "../line/Line.h"
+#include <cstdlib>
+#include <chrono>
+
 
 class Graph
 {
@@ -16,10 +19,11 @@ private:
 	std::map<int, std::vector<int>*>* nodeNeighbours;
 	QGraphicsScene* graphicsScene;
 	const static int totalNodesInGraph;
+	bool weighted;
 
 public:
 	Graph();
-	Graph(QGraphicsScene* graphicsScene);
+	Graph(QGraphicsScene* graphicsScene, bool wieghted = false);
 	~Graph();
 
 	void displayGraphNodes();
@@ -37,5 +41,6 @@ private:
 	void createNeighbours();
 	void pairNodesByLevel();
 	void createStaticGraph();
+	void createWeightedStaticGraph();
 };
 

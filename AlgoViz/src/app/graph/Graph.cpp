@@ -5,14 +5,19 @@ Graph::Graph()
 {
 }
 
-Graph::Graph(QGraphicsScene* graphicsScene)
-	:graphicsScene(graphicsScene)
+Graph::Graph(QGraphicsScene* graphicsScene, bool weighted)
+	:graphicsScene(graphicsScene), weighted(weighted)
 {
 	this->nodesInGraph = new std::vector<Node*>;
 	this->linesInGraph = new std::vector<Line*>;
 	this->nodeNeighbours = new std::map<int, std::vector<int>*>;
 	this->nodePairByLevel = new std::map<int, std::pair<Node*, Node*>*>;
-	createStaticGraph();
+	if (weighted) {
+		createWeightedStaticGraph();
+	}
+	else {
+		createStaticGraph();
+	}
 }
 
 Graph::~Graph()
@@ -69,15 +74,26 @@ void Graph::createConnections()
 	Node* currentNeighbour = nullptr;
 	std::vector<int>* neighbourList = nullptr;
 	Line* line = nullptr;
+	
+	std::srand(std::time(nullptr));
+	int randomWeight = 0;
 
 	for (std::map<int, std::vector<int>*>::iterator it = nodeNeighbours->begin(); it != nodeNeighbours->end(); it++) {
 		currentNode = nodesInGraph->at(it->first);
 		neighbourList = it->second;
 		for (std::vector<int>::iterator nIt = neighbourList->begin(); nIt != neighbourList->end(); nIt++)
 		{
+			
 			currentNeighbour = nodesInGraph->at(*nIt);
 			if (!hasConnection(currentNode, currentNeighbour)) {
-				line = new Line(currentNode, currentNeighbour, false, false);
+				if (weighted) {
+					randomWeight = (std::rand() % 10);
+					line = new Line(currentNode, currentNeighbour, false, false, QString::number(randomWeight));
+				}
+				else {
+					line = new Line(currentNode, currentNeighbour, false, false);
+				}
+				
 				linesInGraph->push_back(line);
 			}
 		}
@@ -104,6 +120,16 @@ void Graph::createStaticGraph()
 	positionGraphNodes();
 	createNeighbours();
 	createConnections();
+
+	
+}
+
+void Graph::createWeightedStaticGraph()
+{
+	createStaticGraph();
+	//for debuggin purposes //temporary hack
+	Node* n = nodesInGraph->at(6);
+	n->setPos(n->pos().x() + 60, n->pos().y() + 60);
 }
 
 /// <summary>
