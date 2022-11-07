@@ -33,6 +33,7 @@ public:
 
 	QGraphicsItem* getStartNode();
 	QGraphicsItem* getEndNode();
+	QString getLineText();
 
 private:
 	QPolygonF* buildArrowHead(const QLineF& line);

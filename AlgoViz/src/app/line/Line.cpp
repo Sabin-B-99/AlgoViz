@@ -75,6 +75,11 @@ QGraphicsItem* Line::getEndNode()
 	return this->endNode;
 }
 
+QString Line::getLineText()
+{
+	return this->lineText;
+}
+
 QPolygonF* Line::buildArrowHead(const QLineF& line)
 {
 	//copied from qt forum
