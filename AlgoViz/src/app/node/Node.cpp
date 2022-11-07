@@ -96,6 +96,11 @@ QBrush* Node::getNodeFillBrush()
 	return nodeFillBrush;
 }
 
+int32_t Node::getNodeValInt()
+{
+	return this->nodeValInt;
+}
+
 
 bool Node::operator==(const Node& other)
 {

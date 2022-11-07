@@ -38,6 +38,8 @@ public:
 	QPen* getNodeOutlinePen();
 	QBrush* getNodeFillBrush();
 
+	int32_t getNodeValInt();
+
 	bool operator==(const Node& other);
 	bool operator!=(const Node& other);
 	bool operator<(const Node& other);
