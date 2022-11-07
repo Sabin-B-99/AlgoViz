@@ -34,6 +34,7 @@ public:
 	std::map<int, std::pair<Node*, Node*>*>* getNodePairByLevel();
 	std::map<int, std::vector<int>*>* getNodeNeighbours();
 	std::vector<std::vector<int>*>* getWeightMatrix();
+	Line* getConnectingLine(Node* start, Node* end);
 
 private:
 	void createGraphNode();

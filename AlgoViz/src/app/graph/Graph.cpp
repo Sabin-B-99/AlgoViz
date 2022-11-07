@@ -63,6 +63,19 @@ std::vector<std::vector<int>*>* Graph::getWeightMatrix()
 	return this->weightMatrix;
 }
 
+Line* Graph::getConnectingLine(Node* start, Node* end)
+{
+	Line* currentLine = nullptr;
+	for (std::vector<Line*>::iterator it = linesInGraph->begin(); it != linesInGraph->end(); it++)
+	{
+		currentLine = *it;
+		if ((start == currentLine->getStartNode() && end == currentLine->getEndNode()) || (start == currentLine->getEndNode() && end == currentLine->getStartNode())) {
+			return currentLine;
+		}
+	}
+	return nullptr;
+}
+
 void Graph::createGraphNode()
 {
 	Node* graphNode = nullptr;
@@ -137,6 +150,10 @@ void Graph::createWeightedStaticGraph()
 	//for debugging purposes //temporary hack
 	Node* n = nodesInGraph->at(6);
 	n->setPos(n->pos().x() + 60, n->pos().y() + 60);
+
+	n = nodesInGraph->at(4);
+	n->setPos(n->pos().x() + 120, n->pos().y() + 20);
+
 }
 
 void Graph::initializeWeightMatrix()
@@ -260,20 +277,26 @@ void Graph::createNeighbours()
 	nodeNeighbours->emplace(0, neighbourListNode0);
 
 	neighbourListNode1->push_back(0);
+	neighbourListNode1->push_back(2); //added later to make loop in graph
 	neighbourListNode1->push_back(5);
 	neighbourListNode1->push_back(6);
 	nodeNeighbours->emplace(1, neighbourListNode1);
 
+	//neighbourListNode2->push_back(1); //added later to make loop in graph
+	neighbourListNode2->push_back(4); //added later to make loop in graph
 	neighbourListNode2->push_back(5);
 	nodeNeighbours->emplace(2, neighbourListNode2);
 
 	nodeNeighbours->emplace(3, neighbourListNode3);
 
+	neighbourListNode4->push_back(2); //added later to make loop in graph
+	neighbourListNode4->push_back(5); //added later to make loop in graph
 	neighbourListNode4->push_back(6);
 	nodeNeighbours->emplace(4, neighbourListNode4);
 
 	neighbourListNode5->push_back(1);
 	neighbourListNode5->push_back(2);
+	neighbourListNode5->push_back(4); //added later to make loop in graph
 	neighbourListNode5->push_back(7);
 	nodeNeighbours->emplace(5, neighbourListNode5);
 
