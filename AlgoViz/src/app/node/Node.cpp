@@ -7,6 +7,7 @@ Node::Node(Node* parent)
 Node::Node(int32_t x, int32_t y, const QString& nodeVal, const QColor& fillColor, Node* parent)
 	:x(x), y(y), nodeVal(nodeVal), parent(parent)
 {
+
 	this->nodeValInt = nodeVal.toInt();
 	boundRectWidth = 50;
 	boundRectHeight = 50;

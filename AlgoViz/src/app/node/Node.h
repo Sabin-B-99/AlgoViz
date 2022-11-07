@@ -46,5 +46,4 @@ public:
 	bool operator<=(const Node& other);
 	bool operator>(const Node& other);
 	bool operator>=(const Node& other);
-
 };
