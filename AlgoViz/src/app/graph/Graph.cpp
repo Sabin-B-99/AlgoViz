@@ -93,7 +93,7 @@ void Graph::createConnections()
 			currentNeighbour = nodesInGraph->at(*nIt);
 			if (!hasConnection(currentNode, currentNeighbour)) {
 				if (weighted) {
-					randomWeight = (std::rand() % 10);
+					randomWeight = (std::rand() % 9) + 1;
 					line = new Line(currentNode, currentNeighbour, false, false, QString::number(randomWeight));
 					setWeightMatrixVal(currentNode, currentNeighbour, randomWeight);
 				}
