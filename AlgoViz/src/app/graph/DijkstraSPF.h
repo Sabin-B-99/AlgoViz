@@ -6,6 +6,7 @@
 #include <QLabel>
 #include "../animation/PauseAnim.h"
 #include <limits>
+#include <QTextCodec>
 
 class DijkstraSPF
 {

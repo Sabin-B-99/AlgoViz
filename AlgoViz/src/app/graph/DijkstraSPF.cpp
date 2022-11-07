@@ -31,6 +31,8 @@ void DijkstraSPF::run(int startNodeId)
 	//	sptSet.at(i) = false;
 	//}
 
+	dist->at(startNodeId) = 0;
+
 	for (int i = 0; i < nodesInGraph->size() - 1; i++)
 	{
 		int nextVertexWithMinDist = minDistance(dist, sptSet);
@@ -38,7 +40,7 @@ void DijkstraSPF::run(int startNodeId)
 
 		for (int v = 0; v < nodesInGraph->size(); v++)
 		{
-			if (!sptSet->at(nextVertexWithMinDist) && weightMatrix->at(nextVertexWithMinDist)->at(v)
+			if (!sptSet->at(v) && weightMatrix->at(nextVertexWithMinDist)->at(v)
 				&& dist->at(nextVertexWithMinDist) != std::numeric_limits<int>::max()
 				&& dist->at(nextVertexWithMinDist) + weightMatrix->at(nextVertexWithMinDist)->at(v) < dist->at(v)){
 
@@ -76,7 +78,7 @@ void DijkstraSPF::printSolution(std::vector<int>* dist)
 	QString soln = "Vertex \t Distance from Source\n";
 	for (int i = 0; i < dspfGraph->getNodesInGraph()->size(); i++)
 	{
-		soln.append(QString::number(i) + " \t\t\t\t" + QString::number(dist->at(i)));
+		soln.append(QString::number(i) + " \t" + QString::number(dist->at(i)) + "\n");
 		dspfConsole->setPlainText(soln);
 	}
 }
