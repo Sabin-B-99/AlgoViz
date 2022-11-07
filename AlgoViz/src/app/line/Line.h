@@ -35,6 +35,8 @@ public:
 	QGraphicsItem* getEndNode();
 	QString getLineText();
 
+	void setLineStrokePen(QPen* lineStrokePen);
+
 private:
 	QPolygonF* buildArrowHead(const QLineF& line);
 

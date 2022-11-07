@@ -80,6 +80,11 @@ QString Line::getLineText()
 	return this->lineText;
 }
 
+void Line::setLineStrokePen(QPen* lineStrokePen)
+{
+	this->lineStrokePen = lineStrokePen;
+}
+
 QPolygonF* Line::buildArrowHead(const QLineF& line)
 {
 	//copied from qt forum
