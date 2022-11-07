@@ -17,6 +17,7 @@ private:
 	std::vector<Line*>* linesInGraph;
 	std::map<int, std::pair<Node*, Node*>*>* nodePairByLevel;
 	std::map<int, std::vector<int>*>* nodeNeighbours;
+	std::vector<std::vector<int>*>* weightMatrix;
 	QGraphicsScene* graphicsScene;
 	const static int totalNodesInGraph;
 	bool weighted;
@@ -32,6 +33,7 @@ public:
 	std::vector<Line*>* getLinesInGraph();
 	std::map<int, std::pair<Node*, Node*>*>* getNodePairByLevel();
 	std::map<int, std::vector<int>*>* getNodeNeighbours();
+	std::vector<std::vector<int>*>* getWeightMatrix();
 
 private:
 	void createGraphNode();
@@ -42,5 +44,7 @@ private:
 	void pairNodesByLevel();
 	void createStaticGraph();
 	void createWeightedStaticGraph();
+	void initializeWeightMatrix();
+	void setWeightMatrixVal(Node* startNode, Node* neighbourNode, int weight);
 };
 

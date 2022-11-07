@@ -12,6 +12,7 @@ Graph::Graph(QGraphicsScene* graphicsScene, bool weighted)
 	this->linesInGraph = new std::vector<Line*>;
 	this->nodeNeighbours = new std::map<int, std::vector<int>*>;
 	this->nodePairByLevel = new std::map<int, std::pair<Node*, Node*>*>;
+	this->weightMatrix = new std::vector<std::vector<int>*>;
 	if (weighted) {
 		createWeightedStaticGraph();
 	}
@@ -57,6 +58,11 @@ std::map<int, std::vector<int>*>* Graph::getNodeNeighbours()
 	return this->nodeNeighbours;
 }
 
+std::vector<std::vector<int>*>* Graph::getWeightMatrix()
+{
+	return this->weightMatrix;
+}
+
 void Graph::createGraphNode()
 {
 	Node* graphNode = nullptr;
@@ -89,6 +95,7 @@ void Graph::createConnections()
 				if (weighted) {
 					randomWeight = (std::rand() % 10);
 					line = new Line(currentNode, currentNeighbour, false, false, QString::number(randomWeight));
+					setWeightMatrixVal(currentNode, currentNeighbour, randomWeight);
 				}
 				else {
 					line = new Line(currentNode, currentNeighbour, false, false);
@@ -96,6 +103,7 @@ void Graph::createConnections()
 				
 				linesInGraph->push_back(line);
 			}
+			
 		}
 	}
 }
@@ -119,17 +127,35 @@ void Graph::createStaticGraph()
 	pairNodesByLevel();
 	positionGraphNodes();
 	createNeighbours();
+	initializeWeightMatrix();
 	createConnections();
-
-	
 }
 
 void Graph::createWeightedStaticGraph()
 {
 	createStaticGraph();
-	//for debuggin purposes //temporary hack
+	//for debugging purposes //temporary hack
 	Node* n = nodesInGraph->at(6);
 	n->setPos(n->pos().x() + 60, n->pos().y() + 60);
+}
+
+void Graph::initializeWeightMatrix()
+{	
+	std::vector<int>* rowVector = nullptr;
+	int totalNodesInCurrentGraph = nodesInGraph->size();
+	for (int i = 0; i < totalNodesInGraph; i++)
+	{
+		rowVector = new std::vector<int>(totalNodesInGraph, 0);
+		this->weightMatrix->emplace_back(rowVector);
+	}
+}
+
+void Graph::setWeightMatrixVal(Node* startNode, Node*neighbourNode, int weight)
+{
+	int currentNodeVal = startNode->getNodeValInt();
+	int neighbourNodeVal = neighbourNode->getNodeValInt();
+	this->weightMatrix->at(currentNodeVal)->at(neighbourNodeVal) = weight;
+	this->weightMatrix->at(neighbourNodeVal)->at(currentNodeVal) = weight;
 }
 
 /// <summary>
