@@ -28,6 +28,6 @@ public:
 
 private:
 	int minDistance(std::vector<int>* dist, std::vector<bool>* sptSet);
-	void printSolution(std::vector<int>* dist);
+	void printSolution(std::vector<int>* dist, int sourceNode);
 };
 
