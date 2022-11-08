@@ -28,6 +28,10 @@ void PrimsMST::run(int startNodeId)
 	key->at(0) = 0;
 	parent->at(startNodeId) = -1;
 
+	Node* currentNode = nullptr;
+	Node* nextNode = nullptr;
+	Line* nodeConnectingLine = nullptr;
+
 	for (int i = 0; i < nodesInGraph->size() - 1; i++)
 	{
 		int nextNodeWithMinKey = minKey(key, mstSet);
@@ -35,6 +39,23 @@ void PrimsMST::run(int startNodeId)
 
 		for (int v = 0; v < nodesInGraph->size(); v++)
 		{
+			//Animation Code
+			currentNode = nodesInGraph->at(nextNodeWithMinKey);
+			nextNode = nodesInGraph->at(v);
+			nodeConnectingLine = primsMSTGraph->getConnectingLine(currentNode, nextNode);
+			if (nodeConnectingLine) {
+				currentNode->setNodeOutlinePen(new QPen(Qt::blue));
+				nextNode->setNodeOutlinePen(new QPen(Qt::red));
+				nodeConnectingLine->setLineStrokePen(new QPen(Qt::red));
+				graphicsScene->update();
+				PauseAnim::showPauseAnimation(1200);
+				currentNode->setNodeOutlinePen(new QPen(Qt::black));
+				nextNode->setNodeOutlinePen(new QPen(Qt::black));
+				nodeConnectingLine->setLineStrokePen(new QPen(Qt::black));
+				graphicsScene->update();
+			}
+			//Animation Code Ends
+
 			if (weightMatrix->at(nextNodeWithMinKey)->at(v) && mstSet->at(v) == false
 				&& weightMatrix->at(nextNodeWithMinKey)->at(v) < key->at(v))
 			{
@@ -87,6 +108,7 @@ void PrimsMST::printMST(std::vector<int>* parent, std::vector<std::vector<int>*>
 		if (connectingLine) {
 			soln.append(QString::number(edgeStartID) + " - " + QString::number(edgeEndID) + " \t" + QString::number(weightMatrix->at(edgeStartID)->at(edgeEndID)) + "\n");
 			primsMSTConsole->setPlainText(soln);
+			connectingLine->setLineStrokePen(new QPen(Qt::red, 2));
 		}
 	}
 }
