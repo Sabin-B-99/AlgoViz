@@ -7,6 +7,7 @@
 #include "../animation/PauseAnim.h"
 #include <limits>
 #include <QTextCodec>
+#include <qtextcodec>
 
 class DijkstraSPF
 {
@@ -14,10 +15,6 @@ private:
 	Graph* dspfGraph;
 	QGraphicsScene* graphicsScene;
 	QPlainTextEdit* dspfConsole;
-
-
-
-
 public:
 	DijkstraSPF();
 	DijkstraSPF(QGraphicsScene* graphicsScene, QPlainTextEdit* dspfConsole);

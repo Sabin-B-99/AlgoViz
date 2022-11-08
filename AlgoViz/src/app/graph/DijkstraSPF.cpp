@@ -1,5 +1,5 @@
 #include "DijkstraSPF.h"
-#include <qtextcodec>
+
 
 DijkstraSPF::DijkstraSPF()
 {
