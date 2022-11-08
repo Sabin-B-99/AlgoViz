@@ -76,6 +76,13 @@ Line* Graph::getConnectingLine(Node* start, Node* end)
 	return nullptr;
 }
 
+std::vector<std::vector<int>> Graph::getEdgeList() {
+	return this->edgeList;
+}
+std::vector<std::vector<int>> Graph::getEdgeListOneWay() {
+	return this->edgeListOneWay;
+}
+
 void Graph::createGraphNode()
 {
 	Node* graphNode = nullptr;
@@ -154,6 +161,8 @@ void Graph::createWeightedStaticGraph()
 	n = nodesInGraph->at(4);
 	n->setPos(n->pos().x() + 120, n->pos().y() + 20);
 
+	createEdgeList();
+	createEdgeListOneWay();
 }
 
 void Graph::initializeWeightMatrix()
@@ -173,6 +182,48 @@ void Graph::setWeightMatrixVal(Node* startNode, Node*neighbourNode, int weight)
 	int neighbourNodeVal = neighbourNode->getNodeValInt();
 	this->weightMatrix->at(currentNodeVal)->at(neighbourNodeVal) = weight;
 	this->weightMatrix->at(neighbourNodeVal)->at(currentNodeVal) = weight;
+}
+
+void Graph::createEdgeList() {
+	int weight = 0;
+	Node* currentNode = nullptr;
+	Node* nextNode = nullptr;
+	for (int row = 0; row < weightMatrix->size(); row++)
+	{
+		currentNode = this->nodesInGraph->at(row);
+		for (int col = 0; col < weightMatrix->at(row)->size(); col++) {
+			nextNode = this->nodesInGraph->at(col);
+			if (hasConnection(currentNode, nextNode)) {
+				weight = weightMatrix->at(row)->at(col);
+				edgeList.push_back({ row, col, weight });
+			}
+		}
+	}
+}
+
+void Graph::createEdgeListOneWay() {
+	int edgeI = -1;
+	int edgeII = -1;
+	int weight = -1;
+	for(std::vector<std::vector<int>>::iterator it = edgeList.begin(); it != edgeList.end();  it++)
+	{
+		edgeI = (*it).at(0);
+		edgeII = (*it).at(1);
+		weight = (*it).at(2);
+		if (!edgeAlreadyInList(edgeII, edgeII, weight)) {
+			edgeListOneWay.push_back({ edgeI, edgeII, weight });
+		}
+	}
+}
+
+bool Graph::edgeAlreadyInList(int edgeI, int edgeII, int weight) {
+	for (std::vector<std::vector<int>>::iterator it = edgeListOneWay.begin(); it != edgeListOneWay.end();  it++)
+	{
+		if (edgeI == (*it).at(0) && edgeII == (*it).at(1) && weight == (*it).at(2)) {
+			return true;
+		}
+	}
+	return false;
 }
 
 /// <summary>
@@ -277,7 +328,7 @@ void Graph::createNeighbours()
 	nodeNeighbours->emplace(0, neighbourListNode0);
 
 	neighbourListNode1->push_back(0);
-	neighbourListNode1->push_back(2); //added later to make loop in graph
+	//neighbourListNode1->push_back(2); //added later to make loop in graph
 	neighbourListNode1->push_back(5);
 	neighbourListNode1->push_back(6);
 	nodeNeighbours->emplace(1, neighbourListNode1);

@@ -21,6 +21,8 @@ private:
 	QGraphicsScene* graphicsScene;
 	const static int totalNodesInGraph;
 	bool weighted;
+	std::vector<std::vector<int>> edgeList;
+	std::vector<std::vector<int>> edgeListOneWay;
 
 public:
 	Graph();
@@ -35,6 +37,8 @@ public:
 	std::map<int, std::vector<int>*>* getNodeNeighbours();
 	std::vector<std::vector<int>*>* getWeightMatrix();
 	Line* getConnectingLine(Node* start, Node* end);
+	std::vector<std::vector<int>> getEdgeList();
+	std::vector<std::vector<int>> getEdgeListOneWay();
 
 private:
 	void createGraphNode();
@@ -47,5 +51,8 @@ private:
 	void createWeightedStaticGraph();
 	void initializeWeightMatrix();
 	void setWeightMatrixVal(Node* startNode, Node* neighbourNode, int weight);
+	void createEdgeList();
+	void createEdgeListOneWay();
+	bool edgeAlreadyInList(int edgeI, int edgeII, int weight);
 };
 
