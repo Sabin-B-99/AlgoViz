@@ -328,12 +328,12 @@ void Graph::createNeighbours()
 	nodeNeighbours->emplace(0, neighbourListNode0);
 
 	neighbourListNode1->push_back(0);
-	//neighbourListNode1->push_back(2); //added later to make loop in graph
+	neighbourListNode1->push_back(2); //added later to make loop in graph
 	neighbourListNode1->push_back(5);
 	neighbourListNode1->push_back(6);
 	nodeNeighbours->emplace(1, neighbourListNode1);
 
-	//neighbourListNode2->push_back(1); //added later to make loop in graph
+	neighbourListNode2->push_back(1); //added later to make loop in graph
 	neighbourListNode2->push_back(4); //added later to make loop in graph
 	neighbourListNode2->push_back(5);
 	nodeNeighbours->emplace(2, neighbourListNode2);
