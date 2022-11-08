@@ -13,12 +13,24 @@ Line::Line(QGraphicsItem* parent)
 	arrowSize = 9;
 }
 
+Line::Line(QPointF* startCoord, QPointF* endCoord, bool hasArrow, bool hasArrowAtTopOrLeft, const QString& lineText, QGraphicsItem* parent) 
+	:startCoord(startCoord), endCoord(endCoord), hasArrowHead(hasArrow), hasArrowAtTopOrLeft(hasArrowAtTopOrLeft), lineText(lineText), parent(parent)
+{
+	lineStrokePen = new QPen(Qt::black);
+	lineStrokePen->setWidth(2);
+	arrowSize = 9;
+	startNode = nullptr;
+	endNode = nullptr;
+}
+
 Line::Line(QGraphicsItem* startNode, QGraphicsItem* endNode, bool hasArrow, bool hasArrowAtTopOrLeft, const QString& lineText, QGraphicsItem* parent)
 	:startNode(startNode), endNode(endNode), hasArrowHead(hasArrow), hasArrowAtTopOrLeft(hasArrowAtTopOrLeft), lineText(lineText), parent(parent)
 {
 	lineStrokePen = new QPen(Qt::black);
 	lineStrokePen->setWidth(2);
 	arrowSize = 9;
+	startCoord = nullptr;
+	endCoord = nullptr;
 }
 
 
@@ -32,14 +44,28 @@ void Line::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWid
 {
 	painter->setPen(*lineStrokePen);
 
-	int32_t lineStartX = startNode->pos().x() + startNode->boundingRect().width() / 2;
-	int32_t lineStartY = startNode->pos().y() + startNode->boundingRect().height();
+	int32_t lineStartX = 0;
+	int32_t lineStartY = 0;
+	int32_t lineEndX = 0;
+	int32_t lineEndY = 0;
+	if (startNode && endNode) {
+		lineStartX = startNode->pos().x() + startNode->boundingRect().width() / 2;
+		lineStartY = startNode->pos().y() + startNode->boundingRect().height();
 
-	int32_t lineEndX = endNode->pos().x() + endNode->boundingRect().width() / 2;
-	int32_t lineEndY = endNode->pos().y();
+		lineEndX = endNode->pos().x() + endNode->boundingRect().width() / 2;
+		lineEndY = endNode->pos().y();
 
-	startCoord = new QPointF(lineStartX, lineStartY);
-	endCoord = new QPointF(lineEndX, lineEndY);
+		startCoord = new QPointF(lineStartX, lineStartY);
+		endCoord = new QPointF(lineEndX, lineEndY);
+	}
+	else {
+		lineStartX = startCoord->x();
+		lineStartY = startCoord->y();
+		lineEndX = endCoord->x();
+		lineEndY = endCoord->y();
+	}
+
+
 	painter->drawLine(*startCoord, *endCoord);
 
 	int32_t textStartX = ((lineEndX + lineStartX) / 2) - 2;

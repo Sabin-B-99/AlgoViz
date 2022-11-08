@@ -11,6 +11,7 @@
 #include <cmath>
 
 
+
 class Line : public QGraphicsItem {
 private:
 	QPointF* startCoord;
@@ -25,6 +26,7 @@ private:
 	QString lineText;
 public:
 	Line(QGraphicsItem* parent = nullptr);
+	Line(QPointF* startCoord, QPointF* endCoord, bool hasArrow, bool hasArrowAtTopOrLeft, const QString& lineText = " ", QGraphicsItem* parent = nullptr);
 	Line(QGraphicsItem* startNode, QGraphicsItem* endNode, bool hasArrow, bool hasArrowAtTopOrLeft, const QString& lineText = " ", QGraphicsItem* parent = nullptr);
 
 	QRectF boundingRect() const;
