@@ -69,11 +69,24 @@ int PrimsMST::minKey(std::vector<int>* key, std::vector<bool>* mstSet)
 void PrimsMST::printMST(std::vector<int>* parent, std::vector<std::vector<int>*>* weightMatrix)
 {
 	QString soln = "Edge \tWeight\n";
-	int parentNodeId = 0;
+	int edgeStartID = 0;
+	int edgeEndID = 0;
+
+	Node* startNode = nullptr;
+	Node* endNode = nullptr;
+	Line* connectingLine = nullptr;
+
 	for (int i = 1; i < primsMSTGraph->getNodesInGraph()->size(); i++)
 	{
-		parentNodeId = parent->at(i);
-		soln.append(QString::number(parentNodeId) + " - " + QString::number(i) + " \t" + QString::number(weightMatrix->at(parentNodeId)->at(i)) + "\n");
-		primsMSTConsole->setPlainText(soln);
+		edgeStartID = parent->at(i);
+		edgeEndID = i;
+
+		startNode = primsMSTGraph->getNodesInGraph()->at(edgeStartID);
+		endNode = primsMSTGraph->getNodesInGraph()->at(edgeEndID);
+		connectingLine = primsMSTGraph->getConnectingLine(startNode, endNode);
+		if (connectingLine) {
+			soln.append(QString::number(edgeStartID) + " - " + QString::number(edgeEndID) + " \t" + QString::number(weightMatrix->at(edgeStartID)->at(edgeEndID)) + "\n");
+			primsMSTConsole->setPlainText(soln);
+		}
 	}
 }
