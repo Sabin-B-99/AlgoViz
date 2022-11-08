@@ -19,12 +19,13 @@ private:
 	QBrush* nodeFillBrush;
 	QPen* nodeOutilePen;
 	Node* parent;
+	bool rectangular;
 
 public:
 	Node(Node*parent = nullptr);
-	Node(int32_t x, int32_t y, const QString& nodeVal, const QColor& fillColor, Node* parent = nullptr);
-	Node(const QString& nodeVal, const QColor& fillColor, Node* parent = nullptr);
-	Node(const QPointF& pos, const QString& nodeVal, const QColor& fillColor, Node* parent = nullptr);
+	Node(int32_t x, int32_t y, const QString& nodeVal, const QColor& fillColor, bool rectangular = false, Node* parent = nullptr);
+	Node(const QString& nodeVal, const QColor& fillColor, bool rectangular = false, Node* parent = nullptr);
+	Node(const QPointF& pos, const QString& nodeVal, const QColor& fillColor, bool rectangular = false, Node* parent = nullptr);
 	~Node();
 
 	QRectF boundingRect() const;

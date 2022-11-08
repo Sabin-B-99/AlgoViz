@@ -4,8 +4,8 @@ Node::Node(Node* parent)
 {
 }
 
-Node::Node(int32_t x, int32_t y, const QString& nodeVal, const QColor& fillColor, Node* parent)
-	:x(x), y(y), nodeVal(nodeVal), parent(parent)
+Node::Node(int32_t x, int32_t y, const QString& nodeVal, const QColor& fillColor, bool rectangular, Node* parent)
+	:x(x), y(y), nodeVal(nodeVal), rectangular(rectangular), parent(parent)
 {
 
 	this->nodeValInt = nodeVal.toInt();
@@ -16,8 +16,8 @@ Node::Node(int32_t x, int32_t y, const QString& nodeVal, const QColor& fillColor
 	nodeEllip = new QGraphicsEllipseItem();
 }
 
-Node::Node(const QString& nodeVal, const QColor& fillColor, Node* parent)
-	:nodeVal(nodeVal), parent(parent)
+Node::Node(const QString& nodeVal, const QColor& fillColor, bool rectangular, Node* parent)
+	:nodeVal(nodeVal), rectangular(rectangular), parent(parent)
 {
 	this->nodeValInt = nodeVal.toInt();
 	x = 0;
@@ -29,8 +29,8 @@ Node::Node(const QString& nodeVal, const QColor& fillColor, Node* parent)
 	nodeEllip = new QGraphicsEllipseItem();
 }
 
-Node::Node(const QPointF& pos, const QString& nodeVal, const QColor& fillColor, Node* parent)
-	:x(pos.x()), y(pos.y()), nodeVal(nodeVal), parent(parent)
+Node::Node(const QPointF& pos, const QString& nodeVal,  const QColor& fillColor, bool rectangular, Node* parent)
+	:x(pos.x()), y(pos.y()), nodeVal(nodeVal), rectangular(rectangular),  parent(parent)
 {
 	this->nodeValInt = nodeVal.toInt();
 	boundRectWidth = 50;
@@ -54,7 +54,15 @@ void Node::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWid
 	QRectF rect = boundingRect();
 	painter->setPen(*nodeOutilePen);
 	painter->setBrush(*nodeFillBrush);
-	painter->drawEllipse(rect);
+
+	if (rectangular) {
+		painter->drawRect(rect);
+	}
+	else {
+		painter->drawEllipse(rect);
+	}
+
+	
 
 	QPointF boundRectCenter = rect.center();
 
