@@ -1,6 +1,7 @@
 #include "Line.h"
 
 Line::Line(QGraphicsItem* parent)
+	:arrowHeadBottomOrRight(nullptr), arrowHeadTopOrLeft(nullptr)
 {
 	startCoord = new QPointF();
 	endCoord = new QPointF();
@@ -13,8 +14,9 @@ Line::Line(QGraphicsItem* parent)
 	arrowSize = 9;
 }
 
-Line::Line(QPointF* startCoord, QPointF* endCoord, bool hasArrow, bool hasArrowAtTopOrLeft, const QString& lineText, QGraphicsItem* parent) 
-	:startCoord(startCoord), endCoord(endCoord), hasArrowHead(hasArrow), hasArrowAtTopOrLeft(hasArrowAtTopOrLeft), lineText(lineText), parent(parent)
+Line::Line(QPointF* startCoord, QPointF* endCoord, bool hasArrow, bool hasArrowAtTopOrLeft, const QString& lineText, Node* parent) 
+	:startCoord(startCoord), endCoord(endCoord), hasArrowHead(hasArrow), hasArrowAtTopOrLeft(hasArrowAtTopOrLeft), lineText(lineText), parent(parent), 
+	arrowHeadBottomOrRight(nullptr), arrowHeadTopOrLeft(nullptr)
 {
 	lineStrokePen = new QPen(Qt::black);
 	lineStrokePen->setWidth(2);
@@ -23,8 +25,9 @@ Line::Line(QPointF* startCoord, QPointF* endCoord, bool hasArrow, bool hasArrowA
 	endNode = nullptr;
 }
 
-Line::Line(QGraphicsItem* startNode, QGraphicsItem* endNode, bool hasArrow, bool hasArrowAtTopOrLeft, const QString& lineText, QGraphicsItem* parent)
-	:startNode(startNode), endNode(endNode), hasArrowHead(hasArrow), hasArrowAtTopOrLeft(hasArrowAtTopOrLeft), lineText(lineText), parent(parent)
+Line::Line(Node* startNode, Node* endNode, bool hasArrow, bool hasArrowAtTopOrLeft, const QString& lineText, Node* parent)
+	:startNode(startNode), endNode(endNode), hasArrowHead(hasArrow), hasArrowAtTopOrLeft(hasArrowAtTopOrLeft), lineText(lineText), parent(parent),
+	arrowHeadBottomOrRight(nullptr), arrowHeadTopOrLeft(nullptr)
 {
 	lineStrokePen = new QPen(Qt::black);
 	lineStrokePen->setWidth(2);
@@ -37,7 +40,10 @@ Line::Line(QGraphicsItem* startNode, QGraphicsItem* endNode, bool hasArrow, bool
 
 QRectF Line::boundingRect() const
 {
-	return QRectF();
+	if (startNode) {
+		return QRectF(startNode->boundingRect());
+	}
+	return QRectF(startCoord->x(), startCoord->y(), lineStrokePen->widthF() + 5, endCoord->y() - startCoord->y());
 }
 
 void Line::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
@@ -74,13 +80,13 @@ void Line::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWid
 	painter->drawText(QPointF(textStartX, textStartY), lineText);
 	
 	if (hasArrowHead) {
-		QPolygonF* arrowHeadBottomOrRight = buildArrowHead(QLineF(*endCoord, *startCoord));
+		arrowHeadBottomOrRight = buildArrowHead(QLineF(*endCoord, *startCoord)); 
 		painter->setBrush(Qt::black);
 		painter->drawPolygon(*arrowHeadBottomOrRight);
 	}
 
 	if (hasArrowAtTopOrLeft) {
-		QPolygonF* arrowHeadTopOrLeft = buildArrowHead(QLineF(*startCoord, *endCoord));
+		arrowHeadTopOrLeft = buildArrowHead(QLineF(*startCoord, *endCoord));
 		painter->setBrush(Qt::black);
 		painter->drawPolygon(*arrowHeadTopOrLeft);
 	}
@@ -110,6 +116,17 @@ void Line::setLineStrokePen(QPen* lineStrokePen)
 {
 	this->lineStrokePen = lineStrokePen;
 }
+
+QPolygonF* Line::getArrowHeadAtTopOrLeft()
+{
+	return this->arrowHeadTopOrLeft;
+}
+
+QPolygonF* Line::getArrowHeadAtBottomOrRight()
+{
+	return this->arrowHeadBottomOrRight;
+}
+
 
 QPolygonF* Line::buildArrowHead(const QLineF& line)
 {
