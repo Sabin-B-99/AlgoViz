@@ -19,7 +19,7 @@ private:
 	Line* tailArrow;
 public:
 	ArrayNode(QGraphicsScene* graphicsScene);
-	ArrayNode(QGraphicsScene* graphicsScene, int size, bool hasHeadArrow = false, bool hasTailArrow = false, const QString& arrowText = "");
+	ArrayNode(QGraphicsScene* graphicsScene, int size, bool hasHeadArrow = false, bool hasTailArrow = false, const QString& headArrowText = "", const QString& tailArrowText = "");
 	~ArrayNode();
 
 	void createNodes();

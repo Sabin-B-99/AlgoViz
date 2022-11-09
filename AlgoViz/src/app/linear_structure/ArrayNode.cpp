@@ -6,12 +6,12 @@ ArrayNode::ArrayNode(QGraphicsScene* graphicsScene)
 	createLinearStructure();
 }
 
-ArrayNode::ArrayNode(QGraphicsScene* graphicsScene, int size, bool hasHeadArrow, bool hasTailArrow,const QString& arrowText)
+ArrayNode::ArrayNode(QGraphicsScene* graphicsScene, int size, bool hasHeadArrow, bool hasTailArrow, const QString& headArrowText, const QString& tailArrowText)
 	:graphicsScene(graphicsScene), size(size), hasHeadArrow(hasHeadArrow) , hasTailArrow(hasTailArrow), headArrow(nullptr), tailArrow(nullptr)
 {
 	nodeList = new std::vector<Node*>;
-	headText = new QGraphicsTextItem(arrowText);
-	tailText = new QGraphicsTextItem(arrowText);
+	headText = new QGraphicsTextItem(headArrowText);
+	tailText = new QGraphicsTextItem(tailArrowText);
 	createLinearStructure();
 
 }
@@ -34,7 +34,7 @@ void ArrayNode::createNodes()
 	headText->setPos(headLineStartX - 13, headLineStartY - 20);
 
 	int tailLineStartX = nodeList->at(0)->pos().x() + nodeList->at(0)->boundingRect().width() / 2;
-	int tailLineStartY = nodeList->at(0)->pos().y() + nodeList->at(0)->boundingRect().height() * 3 + 10 ;
+	int tailLineStartY = nodeList->at(0)->pos().y() + nodeList->at(0)->boundingRect().height() * 3;
 	int tailLineEndX = tailLineStartX;
 	int tailLineEndY = tailLineStartY + nodeList->at(0)->boundingRect().height();
 	tailArrow = new Line(new QPointF(tailLineStartX, tailLineStartY), new QPointF(tailLineEndX, tailLineEndY), false, false);
