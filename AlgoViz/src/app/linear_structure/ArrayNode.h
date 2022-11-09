@@ -2,6 +2,9 @@
 #include "../node/Node.h"
 #include "../line/Line.h"
 #include <QGraphicsTextItem>
+#include <QPropertyAnimation>
+#include <QParallelAnimationGroup>
+#include <QSequentialAnimationGroup>
 class ArrayNode
 {
 private:
@@ -16,13 +19,14 @@ private:
 	Line* tailArrow;
 public:
 	ArrayNode(QGraphicsScene* graphicsScene);
-	ArrayNode(QGraphicsScene* graphicsScene, int size, bool hasHeadArrow = false, bool hasTailArrow = false);
+	ArrayNode(QGraphicsScene* graphicsScene, int size, bool hasHeadArrow = false, bool hasTailArrow = false, const QString& arrowText = "");
 	~ArrayNode();
 
 	void createNodes();
 	void positionNodes();
 	void displayGraphNodes();
 	void createLinearStructure();
+	QParallelAnimationGroup* animateArrow(std::string arrowFlag, int index);
 
 	std::vector<Node*>* getNodeList();
 	QGraphicsTextItem* getHeadText();
