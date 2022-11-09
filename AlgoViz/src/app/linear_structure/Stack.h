@@ -29,6 +29,7 @@ public:
 	void push(int valToPush);
 	void pop();
 
+private:
 	void displayPushAnimation(int valPushed);
 	void displayPopAnimation();
 };
