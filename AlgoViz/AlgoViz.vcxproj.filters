@@ -64,6 +64,30 @@
     <ClCompile Include="src\app\animation\PauseAnim.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\app\graph\DijkstraSPF.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\graph\PrimsMST.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\graph\KruskalMST.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\graph\DSU.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\linear_structure\ArrayNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\linear_structure\Stack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\linear_structure\Queue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\search\Search.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="src\resources\images\trees.png">
@@ -99,9 +123,6 @@
     </QtUic>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\app\line\Line.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\app\tree\BSTNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -118,6 +139,33 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\app\animation\PauseAnim.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\graph\DijkstraSPF.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\graph\PrimsMST.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\graph\KruskalMST.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\graph\DSU.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\linear_structure\ArrayNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\line\Line.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\linear_structure\Stack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\linear_structure\Queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\app\search\Search.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

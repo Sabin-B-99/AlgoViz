@@ -85,14 +85,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\app\linear_structure\ArrayNode.cpp" />
+    <ClCompile Include="src\app\graph\DSU.cpp" />
+    <ClCompile Include="src\app\graph\PrimsMST.cpp" />
+    <ClCompile Include="src\app\graph\DijkstraSPF.cpp" />
     <ClCompile Include="src\app\animation\PauseAnim.cpp" />
     <ClCompile Include="src\app\graph\DFS.cpp" />
     <ClCompile Include="src\app\graph\BFS.cpp" />
     <ClCompile Include="src\app\graph\Graph.cpp" />
+    <ClCompile Include="src\app\graph\KruskalMST.cpp" />
+    <ClCompile Include="src\app\linear_structure\Queue.cpp" />
     <ClCompile Include="src\app\line\Line.cpp" />
     <ClCompile Include="src\app\node\Node.cpp" />
+    <ClCompile Include="src\app\search\Search.cpp" />
     <ClCompile Include="src\app\tree\BSTView.cpp" />
     <ClCompile Include="src\app\tree\BSTNode.cpp" />
+    <ClCompile Include="src\app\linear_structure\Stack.cpp" />
     <QtRcc Include="src\resources\AlgoViz.qrc" />
     <QtUic Include="src\resources\views\BSTView.ui" />
     <QtUic Include="src\resources\views\AlgoViz.ui" />
@@ -115,13 +123,21 @@
     <QtMoc Include="src\app\tree\BSTView.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\app\search\Search.h" />
+    <ClInclude Include="src\app\linear_structure\ArrayNode.h" />
+    <ClInclude Include="src\app\graph\DSU.h" />
+    <ClInclude Include="src\app\graph\KruskalMST.h" />
+    <ClInclude Include="src\app\graph\PrimsMST.h" />
+    <ClInclude Include="src\app\graph\DijkstraSPF.h" />
     <ClInclude Include="src\app\animation\PauseAnim.h" />
     <ClInclude Include="src\app\graph\DFS.h" />
     <ClInclude Include="src\app\graph\BFS.h" />
     <ClInclude Include="src\app\graph\Graph.h" />
+    <ClInclude Include="src\app\linear_structure\Queue.h" />
     <ClInclude Include="src\app\line\Line.h" />
     <ClInclude Include="src\app\node\Node.h" />
     <ClInclude Include="src\app\tree\BSTNode.h" />
+    <ClInclude Include="src\app\linear_structure\Stack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

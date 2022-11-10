@@ -9,6 +9,12 @@
 #include "BSTNode.h"
 #include "../graph/BFS.h"
 #include "../graph/DFS.h"
+#include "../graph/DijkstraSPF.h"
+#include "../graph/PrimsMST.h"
+#include "../graph/KruskalMST.h"
+#include "../linear_structure/Stack.h"
+#include "../linear_structure/Queue.h"
+#include "../search/Search.h"
 #include <iostream>
 
 
@@ -23,7 +29,10 @@ private:
 	QRegularExpression* regExp;
 	QRegularExpressionValidator* regExpValidator;
 	int32_t totalLevel;
-	BSTNode* bst; BFS* bfs; DFS* dfs;
+	BSTNode* bst; BFS* bfs; DFS* dfs; DijkstraSPF* dijkstraSP; PrimsMST* primMST; KruskalMST* kruskalMST;
+	Stack* stack;
+	Queue* q;
+	Search* srch;
 	
 public:
 	BSTView(QWidget *parent = nullptr);
