@@ -12,8 +12,9 @@ ArrayNode::ArrayNode(QGraphicsScene* graphicsScene, int size, bool hasHeadArrow,
 	nodeList = new std::vector<Node*>;
 	headText = new QGraphicsTextItem(headArrowText);
 	tailText = new QGraphicsTextItem(tailArrowText);
+	searchableValues = new std::vector<int>(size, -1);
+	searchableValuesInTextForm = new std::vector<QGraphicsTextItem*>;
 	createLinearStructure();
-
 }
 
 ArrayNode::~ArrayNode()
@@ -118,19 +119,67 @@ void ArrayNode::displayGlowAnimation(int nodeIndex) {
 	nodeToAnimate->setNodeOutlinePen(new QPen(Qt::red, 4));
 	graphicsScene->update();
 	PauseAnim::showPauseAnimation(1500);
-	nodeToAnimate->setNodeOutlinePen(new QPen(Qt::black, 3));
+	nodeToAnimate->setNodeOutlinePen(new QPen(Qt::black));
 	graphicsScene->update();
 }
 
 void ArrayNode::blackOutNodes(int index, const QString& flag) {
 	Node* blackOutNode = nullptr;
-
+	PauseAnim::showPauseAnimation(700);
+	if (flag.compare("-l") == 0) {
+		for (int i = 0; i <= index; i++)
+		{
+			nodeList->at(i)->setNodeFillBrush(new QBrush(Qt::black));
+		}
+	}
+	else {
+		for (int i = index; i < nodeList->size(); i++)
+		{
+			nodeList->at(i)->setNodeFillBrush(new QBrush(Qt::black));
+		}
+	}
 }
 
 void ArrayNode::setNodeColor(int nodeIndex, const QColor& color) {
 	Node* nodeToAnimate = nodeList->at(nodeIndex);
 	nodeToAnimate->setNodeOutlinePen(new QPen(color, 3));
 	graphicsScene->update();
+}
+
+void ArrayNode::generateRandomValues(bool sorted) {
+	std::srand(std::time(nullptr));
+	for (int i = 0; i < size; i++)
+	{
+		int randomValue = std::rand() % 999;
+		searchableValues->at(i) = randomValue;
+	}
+
+	if (sorted) {
+		std::sort(searchableValues->begin(), searchableValues->end());
+	}
+}
+
+void ArrayNode::initializeValuesInBoxes() {
+	int currentIndex = 0;
+	Node* firstBox = nodeList->at(0);
+	QGraphicsTextItem* boxVal = nullptr;
+
+	int boxValPosX = firstBox->pos().x() + (firstBox->boundingRect().width() / 2) - 5;
+	int boxValPosY = firstBox->pos().y() + (firstBox->boundingRect().height() / 2) - 8;
+
+	for (std::vector<int>::iterator it = searchableValues->begin(); it != searchableValues->end(); it++)
+	{
+		boxVal = new QGraphicsTextItem(QString::number(*it));
+		boxVal->setPos(boxValPosX, boxValPosY);
+		searchableValuesInTextForm->emplace_back(boxVal);
+		graphicsScene->addItem(boxVal);
+		boxValPosX += firstBox->boundingRect().width();
+	}
+}
+
+void ArrayNode::displayRandomizedValues(bool sorted) {
+	generateRandomValues(sorted);
+	initializeValuesInBoxes();
 }
 
 std::vector<Node*>* ArrayNode::getNodeList()
@@ -156,4 +205,17 @@ Line* ArrayNode::getHeadArrow()
 Line* ArrayNode::getTailArrow()
 {
 	return this->tailArrow;
+}
+
+
+std::vector<int>* ArrayNode::getSearchableValues() {
+	return this->searchableValues;
+}
+
+void ArrayNode::setHeadArrowLabel(const QString& text) {
+	this->headText->setPlainText(text);
+}
+
+void ArrayNode::setTailTailLabel(const QString& text) {
+	this->tailText->setPlainText(text);
 }
