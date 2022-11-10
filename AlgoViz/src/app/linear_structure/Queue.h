@@ -4,6 +4,8 @@
 #include <QPlainTextEdit>
 #include <queue>
 #include "../animation/PauseAnim.h"
+
+//TODO:: Memory leak causing application to close unexpectedly
 class Queue
 {
 private:

@@ -25,7 +25,7 @@ void Queue::displayStructure()
 void Queue::enqueue(int enqueud)
 {
 	if (tailIndex < MAX_QUEUE_SIZE) {
-		queueElements->push(enqueud);
+		queueElements->emplace(enqueud);
 		displayEnqueueAnim(enqueud);
 		tailIndex++;
 		delete(enqueueLabel);
@@ -67,6 +67,8 @@ void Queue::displayEnqueueAnim(int enqueued)
 	enqueueVal->setPos(initialEnqValPosX, initialEnqValPosY);
 	graphicsScene->addItem(enqueueVal);
 
+	PauseAnim::showPauseAnimation(1000);
+
 	Node* boxToPushValTo = linearBoxes->getNodeList()->at(tailIndex);
 	int finalPushValPosX = boxToPushValTo->pos().x() + (boxToPushValTo->boundingRect().width() / 2) - 5;
 	int finalPushValPosY = boxToPushValTo->pos().y() + (boxToPushValTo->boundingRect().height() / 2) - 8;
@@ -86,10 +88,8 @@ void Queue::displayEnqueueAnim(int enqueued)
 
 	queueElementsInTextForm->push(enqueueVal);
 
-	queueConsole->appendPlainText("Pushing: " + QString::number(enqueued));
+	queueConsole->appendPlainText("Enqueuing: " + QString::number(enqueued));
 	queueConsole->appendPlainText("*********");
-	PauseAnim::showPauseAnimation(1000);
-
 }
 
 void Queue::displayDequeueAnim()
