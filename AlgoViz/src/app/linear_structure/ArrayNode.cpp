@@ -111,7 +111,26 @@ QParallelAnimationGroup* ArrayNode::animateArrow(std::string arrowFlag, int inde
 	animGrp->addAnimation(insertionAnim);
 	animGrp->addAnimation(insertionAnimForText);
 	return animGrp;
-	/*animGrp->start()*/;
+}
+
+void ArrayNode::displayGlowAnimation(int nodeIndex) {
+	Node* nodeToAnimate = nodeList->at(nodeIndex);
+	nodeToAnimate->setNodeOutlinePen(new QPen(Qt::red, 4));
+	graphicsScene->update();
+	PauseAnim::showPauseAnimation(1500);
+	nodeToAnimate->setNodeOutlinePen(new QPen(Qt::black, 3));
+	graphicsScene->update();
+}
+
+void ArrayNode::blackOutNodes(int index, const QString& flag) {
+	Node* blackOutNode = nullptr;
+
+}
+
+void ArrayNode::setNodeColor(int nodeIndex, const QColor& color) {
+	Node* nodeToAnimate = nodeList->at(nodeIndex);
+	nodeToAnimate->setNodeOutlinePen(new QPen(color, 3));
+	graphicsScene->update();
 }
 
 std::vector<Node*>* ArrayNode::getNodeList()

@@ -1,6 +1,7 @@
 #pragma once
 #include "../node/Node.h"
 #include "../line/Line.h"
+#include "../animation/PauseAnim.h"
 #include <QGraphicsTextItem>
 #include <QPropertyAnimation>
 #include <QParallelAnimationGroup>
@@ -27,6 +28,9 @@ public:
 	void displayGraphNodes();
 	void createLinearStructure();
 	QParallelAnimationGroup* animateArrow(std::string arrowFlag, int index);
+	void displayGlowAnimation(int nodeIndex);
+	void setNodeColor(int nodeIndex,const QColor& col);
+	void blackOutNodes(int index, const QString& flag);
 
 	std::vector<Node*>* getNodeList();
 	QGraphicsTextItem* getHeadText();
