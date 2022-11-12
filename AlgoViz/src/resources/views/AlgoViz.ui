@@ -46,30 +46,65 @@
        <property name="spacing">
         <number>6</number>
        </property>
-       <item row="0" column="2">
-        <widget class="QFrame" name="graphAlgoSelectPane">
+       <item row="0" column="0">
+        <widget class="QFrame" name="sortSrchAlgoSelectPane">
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
          </property>
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
+         <widget class="QLabel" name="sortAlgoLabel">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>10</y>
+            <width>121</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Sorting and Searching</string>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::PlainText</enum>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QWidget" name="verticalLayoutWidget_4">
+          <property name="geometry">
+           <rect>
+            <x>320</x>
+            <y>20</y>
+            <width>160</width>
+            <height>131</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="sortSrchButtonsPane">
+           <item>
+            <widget class="QPushButton" name="seqSrchButton">
+             <property name="text">
+              <string>Sequential Search</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="binSrchButton">
+             <property name="text">
+              <string>Binary Search</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="Line" name="algoSelectPaneVSepLine">
+       <item row="1" column="0">
+        <widget class="Line" name="algoSelectPaneHSepLine">
          <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <widget class="QFrame" name="linearAlgoSelectPane">
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
+          <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
@@ -93,28 +128,17 @@
           <layout class="QVBoxLayout" name="treeButtonsPane">
            <item>
             <widget class="QPushButton" name="bstButton">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="text">
               <string>Binary Search Tree</string>
              </property>
             </widget>
            </item>
-           <item>
-            <widget class="QPushButton" name="depthFirstButton">
-             <property name="text">
-              <string>Depth First Search</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="breadthFirsButton">
-             <property name="text">
-              <string>Breadth First Search</string>
-             </property>
-            </widget>
-           </item>
           </layout>
          </widget>
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="treeAlgoLabel">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -135,23 +159,6 @@
          </widget>
         </widget>
        </item>
-       <item row="2" column="1">
-        <widget class="Line" name="algoSelectPaneVSepLineII">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QFrame" name="sortAlgoSelectPane">
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="2">
         <widget class="Line" name="algoSelectPaneHSepLineII">
          <property name="orientation">
@@ -159,11 +166,149 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="Line" name="algoSelectPaneHSepLine">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+       <item row="0" column="2">
+        <widget class="QFrame" name="graphAlgoSelectPane">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
          </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <widget class="QWidget" name="verticalLayoutWidget_2">
+          <property name="geometry">
+           <rect>
+            <x>320</x>
+            <y>20</y>
+            <width>160</width>
+            <height>141</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="graphButtonsPane">
+           <item>
+            <widget class="QPushButton" name="dijkstraButton">
+             <property name="text">
+              <string>Dijkstra's Algorithm</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="dfsButton">
+             <property name="text">
+              <string>Depth First Search</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="bfsButton">
+             <property name="text">
+              <string>Breadth First Search</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="primButton">
+             <property name="text">
+              <string>Prim's MST</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="kruskalButton">
+             <property name="text">
+              <string>Kruskal's MST</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QLabel" name="graphAlgoLabel">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>121</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Graph</string>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::PlainText</enum>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="Line" name="algoSelectPaneVSepLine">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="Line" name="algoSelectPaneVSepLineII">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QFrame" name="linearAlgoSelectPane">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <widget class="QLabel" name="linearAlgoLabl">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>121</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Linear Data Structures</string>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::PlainText</enum>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QWidget" name="verticalLayoutWidget_3">
+          <property name="geometry">
+           <rect>
+            <x>320</x>
+            <y>20</y>
+            <width>160</width>
+            <height>131</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="linAlgoButtonsPane">
+           <item>
+            <widget class="QPushButton" name="stackButton">
+             <property name="text">
+              <string>Stack</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="queueButton">
+             <property name="text">
+              <string>Queue</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </widget>
        </item>
       </layout>
