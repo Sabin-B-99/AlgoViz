@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>BinSrchViewClass</class>
+ <widget class="QWidget" name="BinSrchViewClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1098</width>
+    <height>530</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QPlainTextEdit" name="binSrchInfoPlainTextEdit">
+   <property name="geometry">
+    <rect>
+     <x>720</x>
+     <y>330</y>
+     <width>371</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="Line" name="binSrchAnimTextAreaSeparator">
+   <property name="geometry">
+    <rect>
+     <x>695</x>
+     <y>110</y>
+     <width>31</width>
+     <height>411</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>691</width>
+     <height>97</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="binSrchHeaderAndControlPane">
+    <item>
+     <widget class="QLabel" name="binSrchHeaderLabel">
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600;&quot;&gt;BINARY SEARCH&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="binSrchControlPane">
+      <item>
+       <widget class="QLineEdit" name="binSrchInsertLineEdit"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="binSrchSrchBtn">
+        <property name="text">
+         <string>Search</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="binSrchSrchNewValSepLine">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="binSrchNewValBtn">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>New Values</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QPlainTextEdit" name="binSrchPlainTextEdit">
+   <property name="geometry">
+    <rect>
+     <x>720</x>
+     <y>130</y>
+     <width>371</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="binSrchConsoleLabel">
+   <property name="geometry">
+    <rect>
+     <x>720</x>
+     <y>110</y>
+     <width>47</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Console:</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="binSrchAnimAreaPane" native="true">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>110</y>
+     <width>691</width>
+     <height>411</height>
+    </rect>
+   </property>
+   <widget class="QGraphicsView" name="binSrchAnimArea">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>701</width>
+      <height>411</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QLabel" name="binSrchInfoConsoleLabel">
+   <property name="geometry">
+    <rect>
+     <x>720</x>
+     <y>310</y>
+     <width>47</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Theory:</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="binSrchHomeBtn">
+   <property name="geometry">
+    <rect>
+     <x>710</x>
+     <y>10</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Home</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
