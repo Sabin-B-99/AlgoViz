@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>StackViewClass</class>
+ <widget class="QWidget" name="StackViewClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1093</width>
+    <height>515</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>0</y>
+     <width>691</width>
+     <height>97</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="stackHeaderAndControlPane">
+    <item>
+     <widget class="QLabel" name="stackHeaderLabel">
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:600;&quot;&gt;STACK&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="stackControlPane">
+      <item>
+       <widget class="QLineEdit" name="stackInsertLineEdit"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="stackPushBtn">
+        <property name="text">
+         <string>Push</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="stackPushPopSepLine">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="stackPopBtn">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>Pop</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QLabel" name="stackInfoConsoleLabel">
+   <property name="geometry">
+    <rect>
+     <x>715</x>
+     <y>300</y>
+     <width>47</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Theory:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="stackConsoleLabel">
+   <property name="geometry">
+    <rect>
+     <x>715</x>
+     <y>100</y>
+     <width>47</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Console:</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="stackAnimAreaPane" native="true">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>100</y>
+     <width>691</width>
+     <height>411</height>
+    </rect>
+   </property>
+   <widget class="QGraphicsView" name="stackAnimArea">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>701</width>
+      <height>411</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="stackHomeBtn">
+   <property name="geometry">
+    <rect>
+     <x>705</x>
+     <y>0</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Home</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="stackPlainTextEdit">
+   <property name="geometry">
+    <rect>
+     <x>715</x>
+     <y>120</y>
+     <width>371</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="stackInfoPlainTextEdit">
+   <property name="geometry">
+    <rect>
+     <x>715</x>
+     <y>320</y>
+     <width>371</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="Line" name="stackAnimTextAreaSeparator">
+   <property name="geometry">
+    <rect>
+     <x>690</x>
+     <y>100</y>
+     <width>31</width>
+     <height>411</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
