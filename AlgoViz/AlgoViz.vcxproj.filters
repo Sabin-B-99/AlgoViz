@@ -40,7 +40,7 @@
     <ClCompile Include="src\app\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\app\tree\BSTView.cpp">
+    <ClCompile Include="src\app\tree\ui_classes\BSTView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\app\node\Node.cpp">
@@ -88,6 +88,33 @@
     <ClCompile Include="src\app\search\Search.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\app\graph\ui_classes\BFSView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\graph\ui_classes\DFSView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\graph\ui_classes\DijkstraSPFView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\graph\ui_classes\PrimsMSTView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\graph\ui_classes\KruskalMSTView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\linear_structure\ui_classes\StackView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\linear_structure\ui_classes\QueueView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\search\ui_classes\BinSrchView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\search\ui_classes\SeqSrchView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="src\resources\images\trees.png">
@@ -113,12 +140,66 @@
     <None Include="src\resources\styles\main_window.css" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="src\app\tree\BSTView.h">
+    <QtMoc Include="src\app\tree\ui_classes\BSTView.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\app\graph\ui_classes\DFSView.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\app\graph\ui_classes\BFSView.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\app\graph\ui_classes\DijkstraSPFView.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\app\graph\ui_classes\PrimsMSTView.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\app\graph\ui_classes\KruskalMSTView.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\app\linear_structure\ui_classes\StackView.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\app\linear_structure\ui_classes\QueueView.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\app\search\ui_classes\SeqSrchView.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="src\app\search\ui_classes\BinSrchView.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="src\resources\views\BSTView.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="src\resources\views\BFSView.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="src\resources\views\DFSView.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="src\resources\views\DijkstraView.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="src\resources\views\PrimView.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="src\resources\views\KruskalView.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="src\resources\views\QueueView.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="src\resources\views\StackView.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="src\resources\views\BinSrchView.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="src\resources\views\SeqSrchView.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

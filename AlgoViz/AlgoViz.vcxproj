@@ -85,6 +85,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\app\search\ui_classes\BinSrchView.cpp" />
+    <ClCompile Include="src\app\search\ui_classes\SeqSrchView.cpp" />
+    <ClCompile Include="src\app\linear_structure\ui_classes\QueueView.cpp" />
+    <ClCompile Include="src\app\graph\ui_classes\DijkstraSPFView.cpp" />
+    <ClCompile Include="src\app\graph\ui_classes\KruskalMSTView.cpp" />
+    <ClCompile Include="src\app\graph\ui_classes\PrimsMSTView.cpp" />
+    <ClCompile Include="src\app\graph\ui_classes\DFSView.cpp" />
+    <ClCompile Include="src\app\graph\ui_classes\BFSView.cpp" />
     <ClCompile Include="src\app\linear_structure\ArrayNode.cpp" />
     <ClCompile Include="src\app\graph\DSU.cpp" />
     <ClCompile Include="src\app\graph\PrimsMST.cpp" />
@@ -98,15 +106,25 @@
     <ClCompile Include="src\app\line\Line.cpp" />
     <ClCompile Include="src\app\node\Node.cpp" />
     <ClCompile Include="src\app\search\Search.cpp" />
-    <ClCompile Include="src\app\tree\BSTView.cpp" />
+    <ClCompile Include="src\app\tree\ui_classes\BSTView.cpp" />
     <ClCompile Include="src\app\tree\BSTNode.cpp" />
     <ClCompile Include="src\app\linear_structure\Stack.cpp" />
+    <ClCompile Include="src\app\linear_structure\ui_classes\StackView.cpp" />
     <QtRcc Include="src\resources\AlgoViz.qrc" />
+    <QtUic Include="src\resources\views\BFSView.ui" />
+    <QtUic Include="src\resources\views\BinSrchView.ui" />
     <QtUic Include="src\resources\views\BSTView.ui" />
     <QtUic Include="src\resources\views\AlgoViz.ui" />
     <QtMoc Include="src\app\AlgoViz.h" />
     <ClCompile Include="src\app\AlgoViz.cpp" />
     <ClCompile Include="src\app\main.cpp" />
+    <QtUic Include="src\resources\views\DFSView.ui" />
+    <QtUic Include="src\resources\views\DijkstraView.ui" />
+    <QtUic Include="src\resources\views\KruskalView.ui" />
+    <QtUic Include="src\resources\views\PrimView.ui" />
+    <QtUic Include="src\resources\views\StackView.ui" />
+    <QtUic Include="src\resources\views\SeqSrchView.ui" />
+    <QtUic Include="src\resources\views\QueueView.ui" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="src\resources\images\graph.png" />
@@ -120,9 +138,18 @@
     <None Include="src\resources\styles\main_window.css" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="src\app\tree\BSTView.h" />
+    <QtMoc Include="src\app\tree\ui_classes\BSTView.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="src\app\linear_structure\ui_classes\QueueView.h" />
+    <QtMoc Include="src\app\linear_structure\ui_classes\StackView.h" />
+    <QtMoc Include="src\app\graph\ui_classes\DFSView.h" />
+    <QtMoc Include="src\app\graph\ui_classes\BFSView.h" />
+    <QtMoc Include="src\app\graph\ui_classes\DijkstraSPFView.h" />
+    <QtMoc Include="src\app\graph\ui_classes\KruskalMSTView.h" />
+    <QtMoc Include="src\app\graph\ui_classes\PrimsMSTView.h" />
+    <QtMoc Include="src\app\search\ui_classes\BinSrchView.h" />
+    <QtMoc Include="src\app\search\ui_classes\SeqSrchView.h" />
     <ClInclude Include="src\app\search\Search.h" />
     <ClInclude Include="src\app\linear_structure\ArrayNode.h" />
     <ClInclude Include="src\app\graph\DSU.h" />
