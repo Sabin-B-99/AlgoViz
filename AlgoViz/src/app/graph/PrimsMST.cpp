@@ -8,13 +8,14 @@ PrimsMST::PrimsMST(QGraphicsScene* graphicsScene, QPlainTextEdit* primsMSTConsol
 	:graphicsScene(graphicsScene), primsMSTConsole(primsMSTConsole)
 {
 	primsMSTGraph = new Graph(graphicsScene, true);
+	primsMSTConsole->clear();
 }
 
 PrimsMST::~PrimsMST()
 {
 }
 
-void PrimsMST::run(int startNodeId)
+void PrimsMST::run()
 {
 
 	std::vector<Node*>* nodesInGraph = primsMSTGraph->getNodesInGraph();
@@ -26,7 +27,7 @@ void PrimsMST::run(int startNodeId)
 	std::vector<bool>* mstSet = new std::vector<bool>(nodesInGraph->size(), false);
 
 	key->at(0) = 0;
-	parent->at(startNodeId) = -1;
+	parent->at(0) = -1;
 
 	Node* currentNode = nullptr;
 	Node* nextNode = nullptr;
@@ -35,8 +36,14 @@ void PrimsMST::run(int startNodeId)
 	for (int i = 0; i < nodesInGraph->size() - 1; i++)
 	{
 		int nextNodeWithMinKey = minKey(key, mstSet);
+		if (nextNodeWithMinKey == -1) {
+			nextNodeWithMinKey = 1;
+			/*break;*/
+		}
+		/*else {*/
 		mstSet->at(nextNodeWithMinKey) = true;
-
+		/*}*/
+		
 		for (int v = 0; v < nodesInGraph->size(); v++)
 		{
 			//Animation Code
@@ -97,18 +104,27 @@ void PrimsMST::printMST(std::vector<int>* parent, std::vector<std::vector<int>*>
 	Node* endNode = nullptr;
 	Line* connectingLine = nullptr;
 
+	int weightSum = 0;
+	int currentWeight = 0;
+
 	for (int i = 1; i < primsMSTGraph->getNodesInGraph()->size(); i++)
 	{
 		edgeStartID = parent->at(i);
 		edgeEndID = i;
 
-		startNode = primsMSTGraph->getNodesInGraph()->at(edgeStartID);
-		endNode = primsMSTGraph->getNodesInGraph()->at(edgeEndID);
-		connectingLine = primsMSTGraph->getConnectingLine(startNode, endNode);
-		if (connectingLine) {
-			soln.append(QString::number(edgeStartID) + " - " + QString::number(edgeEndID) + " \t" + QString::number(weightMatrix->at(edgeStartID)->at(edgeEndID)) + "\n");
-			primsMSTConsole->setPlainText(soln);
-			connectingLine->setLineStrokePen(new QPen(Qt::red, 2));
+		if (edgeStartID >= 0) {
+			startNode = primsMSTGraph->getNodesInGraph()->at(edgeStartID);
+			endNode = primsMSTGraph->getNodesInGraph()->at(edgeEndID);
+			connectingLine = primsMSTGraph->getConnectingLine(startNode, endNode);
+			if (connectingLine) {
+				currentWeight = weightMatrix->at(edgeStartID)->at(edgeEndID);
+				weightSum += currentWeight;
+				soln.append(QString::number(edgeStartID) + " - " + QString::number(edgeEndID) + " \t" + QString::number(currentWeight) + "\n");
+				primsMSTConsole->setPlainText(soln);
+				connectingLine->setLineStrokePen(new QPen(Qt::red, 2));
+			}
 		}
 	}
+	soln.append("\n************************\n Total weigth = " + QString::number(weightSum) + "\n");
+	primsMSTConsole->setPlainText(soln);
 }

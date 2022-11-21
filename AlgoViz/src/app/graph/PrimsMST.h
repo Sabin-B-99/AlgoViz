@@ -18,7 +18,7 @@ public:
 	PrimsMST(QGraphicsScene* graphicsScene, QPlainTextEdit* primsMSTConsole);
 	~PrimsMST();
 
-	void run(int startNodeId);
+	void run();
 	void displayGraph();
 
 private:
