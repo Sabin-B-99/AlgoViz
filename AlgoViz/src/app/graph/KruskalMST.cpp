@@ -8,6 +8,7 @@ KruskalMST::KruskalMST(QGraphicsScene* graphicsScene, QPlainTextEdit* kruskalMST
 	:graphicsScene(graphicsScene), kruskalMSTConsole(kruskalMSTConsole)
 {
 	this->kruskalMSTGraph = new Graph(graphicsScene, true);
+	kruskalMSTConsole->clear();
 }
 
 KruskalMST::~KruskalMST()
@@ -73,6 +74,9 @@ void KruskalMST::run()
 		nodeConnectingLine = kruskalMSTGraph->getConnectingLine(currentNode, nextNode);
 		nodeConnectingLine->setLineStrokePen(new QPen(Qt::red, 2));
 	}
+
+	soln.append("\n************************\n Total weigth = " + QString::number(ans) + "\n");
+	kruskalMSTConsole->setPlainText(soln);
 
 }
 
