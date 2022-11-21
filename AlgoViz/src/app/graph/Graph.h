@@ -8,7 +8,7 @@
 #include "../line/Line.h"
 #include <cstdlib>
 #include <chrono>
-
+#include <random>
 
 class Graph
 {
@@ -19,10 +19,19 @@ private:
 	std::map<int, std::vector<int>*>* nodeNeighbours;
 	std::vector<std::vector<int>*>* weightMatrix;
 	QGraphicsScene* graphicsScene;
-	const static int totalNodesInGraph;
+	const static int TOTAL_NODES_IN_GRAPH;
 	bool weighted;
 	std::vector<std::vector<int>> edgeList;
 	std::vector<std::vector<int>> edgeListOneWay;
+
+	//for random graph generation
+	int possibleNodeLines;
+	int possibleLoneNodes;
+	const static int MIN_POSSIBLE_NODE_LINES;
+	const static int MAX_POSSIBLE_NODE_LINES;
+	const static int MIN_POSSIBLE_LONE_NODES;
+	const static int MAX_POSSIBLE_LONE_NODES;
+
 
 public:
 	Graph();
@@ -54,5 +63,12 @@ private:
 	void createEdgeList();
 	void createEdgeListOneWay();
 	bool edgeAlreadyInList(int edgeI, int edgeII, int weight);
+
+	//for random graph generation
+	int randomValInRangeInclusive(int lowerBound, int upperBound);
+	bool valIsInList(std::vector<int>& list, int val);
+	void createRandomNeighbours();
+	std::map<int, std::vector<int>*>* generatePossibleNeighboursList();
+
 };
 

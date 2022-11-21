@@ -86,7 +86,7 @@ std::vector<std::vector<int>> Graph::getEdgeListOneWay() {
 void Graph::createGraphNode()
 {
 	Node* graphNode = nullptr;
-	for (int i = 0; i < totalNodesInGraph; i++)
+	for (int i = 0; i < TOTAL_NODES_IN_GRAPH; i++)
 	{
 		QString nodeVal = QString::number(i);
 		graphNode = new Node(nodeVal, Qt::lightGray);
@@ -146,7 +146,8 @@ void Graph::createStaticGraph()
 	createGraphNode();
 	pairNodesByLevel();
 	positionGraphNodes();
-	createNeighbours();
+	//createNeighbours();
+	createRandomNeighbours();
 	initializeWeightMatrix();
 	createConnections();
 }
@@ -155,11 +156,11 @@ void Graph::createWeightedStaticGraph()
 {
 	createStaticGraph();
 	//for debugging purposes //temporary hack
-	Node* n = nodesInGraph->at(6);
+	/*Node* n = nodesInGraph->at(6);
 	n->setPos(n->pos().x() + 60, n->pos().y() + 60);
 
 	n = nodesInGraph->at(4);
-	n->setPos(n->pos().x() + 120, n->pos().y() + 20);
+	n->setPos(n->pos().x() + 120, n->pos().y() + 20);*/
 
 	createEdgeList();
 	createEdgeListOneWay();
@@ -169,9 +170,9 @@ void Graph::initializeWeightMatrix()
 {	
 	std::vector<int>* rowVector = nullptr;
 	int totalNodesInCurrentGraph = nodesInGraph->size();
-	for (int i = 0; i < totalNodesInGraph; i++)
+	for (int i = 0; i < TOTAL_NODES_IN_GRAPH; i++)
 	{
-		rowVector = new std::vector<int>(totalNodesInGraph, 0);
+		rowVector = new std::vector<int>(TOTAL_NODES_IN_GRAPH, 0);
 		this->weightMatrix->emplace_back(rowVector);
 	}
 }
@@ -226,10 +227,7 @@ bool Graph::edgeAlreadyInList(int edgeI, int edgeII, int weight) {
 	return false;
 }
 
-/// <summary>
-/// TODO: Reftactor later
-///Function needs refractorig later
-/// </summary>
+// TODO: Reftactor later
 void Graph::positionGraphNodes(){
 	
 	Node* firstNode = nullptr;
@@ -243,7 +241,7 @@ void Graph::positionGraphNodes(){
 	int newPosXRight = 0;
 	int newPosYRight = 0;
 
-	int maxWidthPoint = totalNodesInGraph / 4;
+	int maxWidthPoint = TOTAL_NODES_IN_GRAPH / 4;
 	int totalLevels = maxWidthPoint * 2;
 
 	int midPointX = 0;
@@ -268,13 +266,13 @@ void Graph::positionGraphNodes(){
 				nodeToBePositionedLeft = nodePair->first;
 				nodeToBePositionedRight = nodePair->second;
 				
-				newPosXLeft += (midPointX - 50);
+				newPosXLeft += (midPointX - 110);
 				newPosYLeft += (midPointY + 35);
 				nodePos.setX(newPosXLeft);
 				nodePos.setY(newPosYLeft);
 				nodeToBePositionedLeft->setPos(nodePos);
 
-				newPosXRight += (midPointX + 50);
+				newPosXRight += (midPointX + 90);
 				newPosYRight += (midPointY + 35);
 				nodePosRight.setX(newPosXRight);
 				nodePosRight.setY(newPosYRight);
@@ -285,7 +283,7 @@ void Graph::positionGraphNodes(){
 			if (i == totalLevels) {
 				nodeToBePositionedLeft = nodePair->first;
 				nodeToBePositionedRight = nullptr;
-				newPosXLeft += (midPointX + 50);
+				newPosXLeft += (midPointX + 110);
 				newPosYLeft += (midPointY + 35);
 				nodePos.setX(newPosXLeft);
 				nodePos.setY(newPosYLeft);
@@ -295,13 +293,13 @@ void Graph::positionGraphNodes(){
 				nodeToBePositionedLeft = nodePair->first;
 				nodeToBePositionedRight = nodePair->second;
 
-				newPosXLeft += (midPointX + 50);
+				newPosXLeft += (midPointX + 110);
 				newPosYLeft += (midPointY + 35);
 				nodePos.setX(newPosXLeft);
 				nodePos.setY(newPosYLeft);
 				nodeToBePositionedLeft->setPos(nodePos);
 
-				newPosXRight += (midPointX - 50);
+				newPosXRight += (midPointX - 90);
 				newPosYRight += (midPointY + 35);
 				nodePosRight.setX(newPosXRight);
 				nodePosRight.setY(newPosYRight);
@@ -361,7 +359,7 @@ void Graph::createNeighbours()
 
 void Graph::pairNodesByLevel()
 {
-	int maxWidthPoint = totalNodesInGraph / 4;
+	int maxWidthPoint = TOTAL_NODES_IN_GRAPH / 4;
 	int totalLevels = maxWidthPoint * 2;
 
 	Node* nodeLeft = nullptr;
@@ -375,7 +373,7 @@ void Graph::pairNodesByLevel()
 			nodeRight = nullptr;
 		}
 		else if (i == totalLevels) {
-			nodeLeft = nodesInGraph->at(totalNodesInGraph - 1);
+			nodeLeft = nodesInGraph->at(TOTAL_NODES_IN_GRAPH - 1);
 			nodeRight = nullptr;
 		}
 		else {
@@ -390,6 +388,116 @@ void Graph::pairNodesByLevel()
 	}
 }
 
+int Graph::randomValInRangeInclusive(int lowerBound, int upperBound) {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> distr(lowerBound, upperBound);
+	return distr(gen);
+}
+
+bool Graph::valIsInList(std::vector<int>& list, int val)
+{
+	for (std::vector<int>::iterator it = list.begin(); it != list.end(); it++) {
+		if (val == (*it)) {
+			return true;
+		}
+	}
+	return false;
+}
+
+void Graph::createRandomNeighbours() {
+	this->possibleLoneNodes = randomValInRangeInclusive(MIN_POSSIBLE_LONE_NODES, MAX_POSSIBLE_LONE_NODES);
+	this->possibleNodeLines = randomValInRangeInclusive(MIN_POSSIBLE_NODE_LINES, (MAX_POSSIBLE_NODE_LINES - this->possibleLoneNodes));
+
+	std::vector<int>* blackListedNodes = new std::vector<int>();
+
+	std::srand(time(nullptr));
+	while (blackListedNodes->size() != this->possibleLoneNodes)
+	{
+		int randomNode = std::rand() % TOTAL_NODES_IN_GRAPH;
+		if (!valIsInList(*blackListedNodes, randomNode) && randomNode != 0) {
+			blackListedNodes->push_back(randomNode);
+		}
+	}
+	
+	std::map<int, std::vector<int>*>* possibleNeighboursForAllNodes = generatePossibleNeighboursList();
+	
+
+	int numOfNeighboursConnected = 0;
+	int randomStartNode = -1;
+	int randomNeighbourSelected = -1;
+	std::vector<int>* neighbourList = nullptr;
 
 
-const int Graph::totalNodesInGraph = 8;
+	for (int i = 0; i < nodesInGraph->size(); i++)
+	{
+		neighbourList = new std::vector<int>;
+		nodeNeighbours->emplace(i, neighbourList);
+	}
+
+	while (numOfNeighboursConnected != this->possibleNodeLines)
+	{
+		randomStartNode = std::rand() % (TOTAL_NODES_IN_GRAPH - this->possibleLoneNodes);
+		if (!valIsInList(*blackListedNodes, randomStartNode)) {
+			std::random_device rd;
+			std::mt19937 eng(rd());
+			std::uniform_int_distribution<> distr(0, possibleNeighboursForAllNodes->at(randomStartNode)->size() - 1);
+			randomNeighbourSelected = possibleNeighboursForAllNodes->at(randomStartNode)->at(distr(eng));
+
+			Node* firstNode = nodesInGraph->at(randomStartNode);
+			Node* secondNode = nodesInGraph->at(randomNeighbourSelected);
+			if (!hasConnection(firstNode, secondNode)) {
+				nodeNeighbours->at(randomStartNode)->push_back(randomNeighbourSelected);
+				nodeNeighbours->at(randomNeighbourSelected)->push_back(randomStartNode);
+				numOfNeighboursConnected++;
+			}
+		}
+
+	}
+}
+
+std::map<int, std::vector<int>*>* Graph::generatePossibleNeighboursList() {
+	
+
+	std::map<int, std::vector<int>*>* possibleNeighboursListForAllNodes = new std::map<int, std::vector<int>*>;
+	std::vector<int>* possibleNeighbours = nullptr;
+	for (int i = 0; i < nodesInGraph->size(); i++)
+	{
+		possibleNeighbours = new std::vector<int>;
+		possibleNeighboursListForAllNodes->emplace(i, possibleNeighbours);
+	}
+
+	//hardcoding ... TODO: refactor later, make it dynamic
+	std::vector<int>::iterator it = possibleNeighboursListForAllNodes->at(0)->begin();
+	possibleNeighboursListForAllNodes->at(0)->insert(it, { 1,2,5});
+	
+	it = possibleNeighboursListForAllNodes->at(1)->begin();
+	possibleNeighboursListForAllNodes->at(1)->insert(it, { 0,2,3,4,5,6,7});
+
+	it = possibleNeighboursListForAllNodes->at(2)->begin();
+	possibleNeighboursListForAllNodes->at(2)->insert(it, { 0,1,3,4,5,6,7 });
+
+	it = possibleNeighboursListForAllNodes->at(3)->begin();
+	possibleNeighboursListForAllNodes->at(3)->insert(it, {1,2,4,5,6});
+
+	it = possibleNeighboursListForAllNodes->at(4)->begin();
+	possibleNeighboursListForAllNodes->at(4)->insert(it, { 1,2,3,5,6});
+
+	it = possibleNeighboursListForAllNodes->at(5)->begin();
+	possibleNeighboursListForAllNodes->at(5)->insert(it, { 0,1,2,3,4,6,7 });
+
+	it = possibleNeighboursListForAllNodes->at(6)->begin();
+	possibleNeighboursListForAllNodes->at(6)->insert(it, { 0,1,2,3,4,5,7 });
+
+	it = possibleNeighboursListForAllNodes->at(7)->begin();
+	possibleNeighboursListForAllNodes->at(7)->insert(it, { 0,1,2,5,6 });
+
+	return possibleNeighboursListForAllNodes;
+}
+
+
+const int Graph::TOTAL_NODES_IN_GRAPH = 8;
+const int Graph::MIN_POSSIBLE_LONE_NODES = 0;
+const int Graph::MAX_POSSIBLE_LONE_NODES = 1;
+const int Graph::MIN_POSSIBLE_NODE_LINES = 7;
+const int Graph::MAX_POSSIBLE_NODE_LINES = 9;
