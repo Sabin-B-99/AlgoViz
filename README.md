@@ -24,6 +24,10 @@ That **one credit** needed to pass the semester.
 A quick demonstration video of the application.
 
 
+https://github.com/Sabin-B-99/AlgoViz/assets/55592534/1a23a71b-a62f-473c-a54b-fa963382bd52
+
+
+
 
 ## Quick start
 **_For Windows OS_**
